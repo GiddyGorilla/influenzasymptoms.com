@@ -1,0 +1,68 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+export interface Props {
+  title: string;
+  description: string;
+  publishDate?: string;
+  lastReviewed?: string;
+  author?: string;
+  reviewer?: string;
+  image?: string;
+}
+const {
+  title, description, publishDate, lastReviewed,
+  author = "InfluenzaSymptoms Editorial Team",
+  reviewer, image,
+} = Astro.props;
+---
+
+<BaseLayout title={title} description={description} image={image}>
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Article header -->
+    <header class="mb-10">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-navy-900 font-sans leading-tight mb-4">
+        {title}
+      </h1>
+      <p class="text-xl text-gray-500 font-serif leading-relaxed mb-6">
+        {description}
+      </p>
+
+      <!-- Meta -->
+      <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500">
+        {publishDate && (
+          <span>📅 Published: {publishDate}</span>
+        )}
+        {lastReviewed && (
+          <span class="font-semibold text-teal-600">✓ Medically reviewed: {lastReviewed}</span>
+        )}
+        {author && (
+          <span>✍️ {author}</span>
+        )}
+      </div>
+
+      {reviewer && (
+        <div class="mt-4 bg-teal-100/50 border border-teal-200 rounded-lg px-4 py-3 flex items-start gap-3">
+          <span class="text-teal-600 text-lg mt-0.5">🩺</span>
+          <div>
+            <p class="text-sm font-semibold text-teal-800">Medically reviewed by</p>
+            <p class="text-sm text-teal-700">{reviewer}</p>
+          </div>
+        </div>
+      )}
+    </header>
+
+    <!-- Article body -->
+    <div class="prose max-w-none">
+      <slot />
+    </div>
+
+    <!-- Sources section placeholder -->
+    <div class="mt-16 pt-8 border-t border-gray-200">
+      <h3 class="text-lg font-semibold text-navy-800 mb-2">Sources</h3>
+      <p class="text-sm text-gray-500">
+        This article references information from the CDC, WHO, NHS, and peer-reviewed medical literature.
+        Content is reviewed regularly for accuracy. <a href="/about/#editorial-policy" class="text-teal-600 underline">Learn about our editorial policy</a>.
+      </p>
+    </div>
+  </article>
+</BaseLayout>

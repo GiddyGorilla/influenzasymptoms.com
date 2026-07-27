@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy-900: #0a2540;
+  --color-navy-800: #1a365d;
+  --color-navy-700: #2a4a7f;
+  --color-teal-600: #2c9a92;
+  --color-teal-500: #3db5a8;
+  --color-teal-100: #e6f7f5;
+  --color-amber-500: #f59e0b;
+  --color-amber-100: #fef3c7;
+  --color-red-600: #dc2626;
+  --color-red-100: #fee2e2;
+  --color-cream: #fafbfc;
+  --color-cream-dark: #f1f5f9;
+
+  --font-sans: "Inter", "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-serif: "Source Serif 4", "Lora", Georgia, serif;
+
+  --text-base--line-height: 1.75;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  @apply bg-cream text-gray-900 font-sans;
+}
+
+/* Article content typography */
+.prose {
+  @apply text-lg leading-relaxed text-gray-800;
+}
+.prose h2 {
+  @apply text-2xl font-bold text-navy-800 mt-10 mb-4;
+}
+.prose h3 {
+  @apply text-xl font-semibold text-navy-700 mt-8 mb-3;
+}
+.prose p {
+  @apply mb-5;
+}
+.prose ul {
+  @apply list-disc pl-6 mb-5 space-y-2;
+}
+.prose ol {
+  @apply list-decimal pl-6 mb-5 space-y-2;
+}
+.prose li {
+  @apply text-gray-700;
+}
+.prose a {
+  @apply text-teal-600 underline decoration-teal-600/30 hover:decoration-teal-600 transition;
+}
+.prose strong {
+  @apply font-semibold text-gray-900;
+}
+.prose blockquote {
+  @apply border-l-4 border-teal-500 bg-teal-100/50 px-6 py-4 my-6 rounded-r-lg text-gray-700 italic;
+}
+.prose table {
+  @apply w-full border-collapse my-6;
+}
+.prose th {
+  @apply bg-navy-800 text-white font-semibold px-4 py-3 text-left text-sm;
+}
+.prose td {
+  @apply border border-gray-200 px-4 py-3 text-sm;
+}
+.prose tr:nth-child(even) td {
+  @apply bg-gray-50;
+}
+
+/* Callout boxes */
+.callout-warning {
+  @apply bg-amber-100 border-l-4 border-amber-500 px-6 py-4 my-6 rounded-r-lg;
+}
+.callout-emergency {
+  @apply bg-red-100 border-l-4 border-red-600 px-6 py-4 my-6 rounded-r-lg font-semibold;
+}
+.callout-info {
+  @apply bg-teal-100 border-l-4 border-teal-600 px-6 py-4 my-6 rounded-r-lg;
+}

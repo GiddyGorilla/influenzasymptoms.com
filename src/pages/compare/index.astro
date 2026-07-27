@@ -1,0 +1,59 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Flu vs. Cold vs. COVID-19 — Symptom Comparison Guide"
+  description="Compare influenza, common cold, COVID-19, RSV, and other respiratory illnesses. Clear comparison charts and symptom checklists to help you tell them apart."
+>
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <header class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-teal-600 font-semibold text-sm uppercase tracking-wide">Comparison Hub</span>
+      <h1 class="text-4xl md:text-5xl font-extrabold text-navy-900 mt-2 mb-4">
+        Is It the Flu, a Cold, or Something Else?
+      </h1>
+      <p class="text-lg text-gray-500 leading-relaxed">
+        Many respiratory illnesses share similar symptoms. Our detailed comparisons help you understand the key differences.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <a href="/compare/flu-vs-cold/" class="bg-white rounded-xl p-6 border border-gray-100 hover:shadow-md hover:border-teal-200 transition-all group">
+        <span class="text-3xl block mb-3">🤧🦠</span>
+        <h3 class="font-bold text-lg text-navy-800 group-hover:text-teal-600 transition-colors">Flu vs. Common Cold</h3>
+        <p class="text-sm text-gray-500 mt-2">How to tell the difference between influenza and the common cold. Symptom onset, severity, and duration compared.</p>
+        <span class="inline-block mt-3 text-teal-600 font-medium text-sm">Compare →</span>
+      </a>
+      <a href="/compare/flu-vs-covid/" class="bg-white rounded-xl p-6 border border-gray-100 hover:shadow-md hover:border-teal-200 transition-all group">
+        <span class="text-3xl block mb-3">🦠🦠</span>
+        <h3 class="font-bold text-lg text-navy-800 group-hover:text-teal-600 transition-colors">Flu vs. COVID-19</h3>
+        <p class="text-sm text-gray-500 mt-2">The most important comparison. Key differences in symptoms, incubation period, contagiousness, and severity.</p>
+        <span class="inline-block mt-3 text-teal-600 font-medium text-sm">Compare →</span>
+      </a>
+      <a href="/compare/flu-vs-rsv/" class="bg-white rounded-xl p-6 border border-gray-100 hover:shadow-md hover:border-teal-200 transition-all group">
+        <span class="text-3xl block mb-3">🫁</span>
+        <h3 class="font-bold text-lg text-navy-800 group-hover:text-teal-600 transition-colors">Flu vs. RSV</h3>
+        <p class="text-sm text-gray-500 mt-2">Respiratory Syncytial Virus shares many flu symptoms. Learn the differences, especially for infants and elderly.</p>
+        <span class="inline-block mt-3 text-teal-600 font-medium text-sm">Compare →</span>
+      </a>
+      <a href="/compare/flu-vs-strep/" class="bg-white rounded-xl p-6 border border-gray-100 hover:shadow-md hover:border-teal-200 transition-all group">
+        <span class="text-3xl block mb-3">😷</span>
+        <h3 class="font-bold text-lg text-navy-800 group-hover:text-teal-600 transition-colors">Flu vs. Strep Throat</h3>
+        <p class="text-sm text-gray-500 mt-2">Sore throat is common in both — but the cause and treatment are very different. How to tell them apart.</p>
+        <span class="inline-block mt-3 text-teal-600 font-medium text-sm">Compare →</span>
+      </a>
+      <a href="/compare/flu-vs-allergies/" class="bg-white rounded-xl p-6 border border-gray-100 hover:shadow-md hover:border-teal-200 transition-all group">
+        <span class="text-3xl block mb-3">🌸</span>
+        <h3 class="font-bold text-lg text-navy-800 group-hover:text-teal-600 transition-colors">Flu vs. Allergies</h3>
+        <p class="text-sm text-gray-500 mt-2">Allergy symptoms can mimic the flu. Key differences in fever, body aches, and symptom duration.</p>
+        <span class="inline-block mt-3 text-teal-600 font-medium text-sm">Compare →</span>
+      </a>
+      <a href="/compare/flu-vs-pneumonia/" class="bg-white rounded-xl p-6 border border-gray-100 hover:shadow-md hover:border-teal-200 transition-all group">
+        <span class="text-3xl block mb-3">⚠️</span>
+        <h3 class="font-bold text-lg text-navy-800 group-hover:text-teal-600 transition-colors">Flu vs. Pneumonia</h3>
+        <p class="text-sm text-gray-500 mt-2">Pneumonia can develop as a flu complication. Learn to recognize the warning signs that distinguish them.</p>
+        <span class="inline-block mt-3 text-teal-600 font-medium text-sm">Compare →</span>
+      </a>
+    </div>
+  </section>
+</BaseLayout>
