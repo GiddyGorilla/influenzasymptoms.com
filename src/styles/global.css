@@ -84,3 +84,40 @@ body {
 .callout-info {
   @apply bg-teal-100 border-l-4 border-teal-600 px-6 py-4 my-6 rounded-r-lg;
 }
+
+/* Inline citations */
+.citation {
+  @apply text-xs font-semibold text-teal-600 no-underline align-super;
+  text-decoration: none !important;
+}
+.citation:hover {
+  @apply text-teal-500;
+}
+
+/* References section */
+.references {
+  @apply mt-16 pt-8 border-t border-gray-200;
+}
+.references h2 {
+  @apply !text-xl !font-bold !text-navy-800 !mb-4;
+}
+.references ol {
+  @apply list-decimal pl-6 mb-5 space-y-2 text-sm text-gray-600;
+}
+.references li {
+  @apply text-sm text-gray-600;
+}
+.references a {
+  @apply text-teal-600 underline decoration-teal-600/30 hover:decoration-teal-600 transition;
+}
+
+/* Infographic responsive container */
+.infographic {
+  @apply my-8 bg-white rounded-xl border border-gray-200 p-4 flex justify-center overflow-hidden;
+}
+.infographic img,
+.infographic svg {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}

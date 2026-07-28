@@ -16,7 +16,22 @@ const {
   reviewer, image, faqItems,
 } = Astro.props;
 
-// Render slot content to string for FAQ extraction
+// --- ISO Date helper ---
+function toISODate(dateStr: string | undefined): string | undefined {
+  if (!dateStr) return undefined;
+  try {
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return dateStr;
+    return d.toISOString().split("T")[0]; // YYYY-MM-DD
+  } catch {
+    return dateStr;
+  }
+}
+
+const isoPublishDate = toISODate(publishDate);
+const isoLastReviewed = toISODate(lastReviewed);
+
+// Render slot content to string for FAQ extraction and TOC
 const slotContent = await Astro.slots.render("default");
 
 // --- FAQ auto-detection from headings ---
@@ -52,6 +67,26 @@ function extractFAQs(html: string): { question: string; answer: string }[] {
 
 const detectedFAQs = faqItems ?? extractFAQs(slotContent);
 
+// --- TOC extraction from h2 headings ---
+function extractTOC(html: string): { id: string; text: string }[] {
+  const headingRegex = /<h2\b[^>]*>(.*?)<\/h2>/gi;
+  const items: { id: string; text: string }[] = [];
+  let m: RegExpExecArray | null;
+  while ((m = headingRegex.exec(html)) !== null) {
+    const text = m[1].replace(/<[^>]+>/g, "").trim();
+    const id = text
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-")
+      .replace(/(^-|-$)/g, "");
+    items.push({ id, text });
+  }
+  return items;
+}
+
+const tocItems = extractTOC(slotContent);
+
 // --- Schema.org: MedicalWebPage ---
 const siteUrl = Astro.site?.origin ?? "https://influenzasymptoms.com";
 const currentUrl = new URL(Astro.url.pathname, siteUrl).href;
@@ -66,18 +101,24 @@ const medicalWebPageSchema: Record<string, any> = {
     "@type": "Organization",
     name: author,
   },
+  publisher: {
+    "@type": "Organization",
+    name: "InfluenzaSymptoms.com",
+    url: siteUrl,
+    logo: `${siteUrl}/og-image.svg`,
+  },
   about: {
     "@type": "MedicalCondition",
     name: "Influenza",
   },
 };
 
-if (publishDate) {
-  medicalWebPageSchema.datePublished = publishDate;
+if (isoPublishDate) {
+  medicalWebPageSchema.datePublished = isoPublishDate;
 }
-if (lastReviewed) {
-  medicalWebPageSchema.dateReviewed = lastReviewed;
-  medicalWebPageSchema.lastReviewed = lastReviewed;
+if (isoLastReviewed) {
+  medicalWebPageSchema.dateReviewed = isoLastReviewed;
+  medicalWebPageSchema.lastReviewed = isoLastReviewed;
 }
 if (reviewer) {
   medicalWebPageSchema.reviewedBy = {
@@ -114,52 +155,97 @@ if (faqSchema) articleSchemas.push(faqSchema);
   image={image}
   jsonLd={articleSchemas}
 >
-  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <!-- Article header -->
-    <header class="mb-10">
-      <h1 class="text-4xl md:text-5xl font-extrabold text-navy-900 font-sans leading-tight mb-4">
-        {title}
-      </h1>
-      <p class="text-xl text-gray-500 font-serif leading-relaxed mb-6">
-        {description}
-      </p>
+  <article class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="flex flex-col lg:flex-row gap-10">
+      <!-- Main content -->
+      <div class="flex-1 min-w-0 max-w-4xl">
+        <!-- Article header -->
+        <header class="mb-10">
+          <h1 class="text-4xl md:text-5xl font-extrabold text-navy-900 font-sans leading-tight mb-4">
+            {title}
+          </h1>
+          <p class="text-xl text-gray-500 font-serif leading-relaxed mb-6">
+            {description}
+          </p>
 
-      <!-- Meta -->
-      <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500">
-        {publishDate && (
-          <span>📅 Published: {publishDate}</span>
-        )}
-        {lastReviewed && (
-          <span class="font-semibold text-teal-600">✓ Medically reviewed: {lastReviewed}</span>
-        )}
-        {author && (
-          <span>✍️ {author}</span>
-        )}
+          <!-- Prominent review date badge -->
+          {lastReviewed && (
+            <div class="mb-4 inline-flex items-center gap-2 bg-green-50 border border-green-200 rounded-lg px-4 py-2">
+              <span class="text-green-600 font-semibold text-sm">✓ Medically reviewed on {lastReviewed}</span>
+            </div>
+          )}
+
+          <!-- Meta line -->
+          <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500">
+            {publishDate && (
+              <span>📅 Published: {publishDate}</span>
+            )}
+            {author && (
+              <span>✍️ {author}</span>
+            )}
+          </div>
+
+          {reviewer && (
+            <div class="mt-4 bg-teal-100/50 border border-teal-200 rounded-lg px-4 py-3 flex items-start gap-3">
+              <span class="text-teal-600 text-lg mt-0.5">🩺</span>
+              <div>
+                <p class="text-sm font-semibold text-teal-800">Medically reviewed by</p>
+                <p class="text-sm text-teal-700">{reviewer}</p>
+              </div>
+            </div>
+          )}
+        </header>
+
+        <!-- Article body -->
+        <div class="prose max-w-none">
+          <Fragment set:html={slotContent} />
+        </div>
+
+        <!-- Sources section -->
+        <div class="mt-16 pt-8 border-t border-gray-200">
+          <h3 class="text-lg font-semibold text-navy-800 mb-2">Sources</h3>
+          <p class="text-sm text-gray-500">
+            This article references information from the CDC, WHO, NHS, and peer-reviewed medical literature.
+            Content is reviewed regularly for accuracy. <a href="/about/#editorial-policy" class="text-teal-600 underline">Learn about our editorial policy</a>.
+          </p>
+        </div>
       </div>
 
-      {reviewer && (
-        <div class="mt-4 bg-teal-100/50 border border-teal-200 rounded-lg px-4 py-3 flex items-start gap-3">
-          <span class="text-teal-600 text-lg mt-0.5">🩺</span>
-          <div>
-            <p class="text-sm font-semibold text-teal-800">Medically reviewed by</p>
-            <p class="text-sm text-teal-700">{reviewer}</p>
-          </div>
-        </div>
+      <!-- TOC Sidebar -->
+      {tocItems.length > 0 && (
+        <aside class="lg:w-64 flex-shrink-0">
+          <nav class="lg:sticky lg:top-24 bg-white border border-gray-200 rounded-lg p-5">
+            <h2 class="text-sm font-semibold text-navy-800 uppercase tracking-wider mb-3">On this page</h2>
+            <ul class="space-y-2">
+              {tocItems.map((item) => (
+                <li>
+                  <a
+                    href={`#${item.id}`}
+                    class="block text-sm text-gray-600 hover:text-teal-600 transition-colors py-1 border-l-2 border-transparent hover:border-teal-500 pl-3 -ml-3"
+                  >
+                    {item.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </aside>
       )}
-    </header>
-
-    <!-- Article body -->
-    <div class="prose max-w-none">
-      <Fragment set:html={slotContent} />
-    </div>
-
-    <!-- Sources section placeholder -->
-    <div class="mt-16 pt-8 border-t border-gray-200">
-      <h3 class="text-lg font-semibold text-navy-800 mb-2">Sources</h3>
-      <p class="text-sm text-gray-500">
-        This article references information from the CDC, WHO, NHS, and peer-reviewed medical literature.
-        Content is reviewed regularly for accuracy. <a href="/about/#editorial-policy" class="text-teal-600 underline">Learn about our editorial policy</a>.
-      </p>
     </div>
   </article>
+
+  <!-- Client-side script: add IDs to h2/h3 headings for TOC linking -->
+  <script>
+    document.querySelectorAll(".prose h2, .prose h3").forEach((heading) => {
+      if (heading.id) return;
+      const text = heading.textContent?.trim() || "";
+      const id = text
+        .toLowerCase()
+        .replace(/[^a-z0-9\\s-]/g, "")
+        .replace(/\\s+/g, "-")
+        .replace(/-+/g, "-")
+        .replace(/(^-|-$)/g, "");
+      if (id) heading.id = id;
+    });
+  </script>
 </BaseLayout>

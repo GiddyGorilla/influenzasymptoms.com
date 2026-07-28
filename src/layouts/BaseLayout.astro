@@ -17,7 +17,30 @@ const organizationSchema: Record<string, any> = {
   "@type": "Organization",
   name: "InfluenzaSymptoms.com",
   url: siteUrl,
+  logo: `${siteUrl}/og-image.svg`,
   sameAs: [],
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      email: "contact@influenzasymptoms.com",
+      availableLanguage: ["English"],
+    },
+  ],
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Stockholm",
+    addressCountry: "SE",
+  },
+};
+
+// --- Schema.org: Publisher ---
+const publisherSchema: Record<string, any> = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "InfluenzaSymptoms.com",
+  url: siteUrl,
+  logo: `${siteUrl}/og-image.svg`,
 };
 
 // --- Schema.org: WebSite ---
@@ -80,6 +103,7 @@ const breadcrumbSchema = generateBreadcrumbs(Astro.url.pathname);
 // Build combined JSON-LD array
 const allSchemas: Record<string, any>[] = [
   organizationSchema,
+  publisherSchema,
   webSiteSchema,
 ];
 if (breadcrumbSchema) allSchemas.push(breadcrumbSchema);
@@ -95,10 +119,12 @@ if (jsonLd.length > 0) allSchemas.push(...jsonLd);
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    {image && <meta property="og:image" content={image} />}
+    <meta property="og:image" content={image || siteUrl + '/og-image.svg'} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image || siteUrl + '/og-image.svg'} />
+    <link rel="canonical" href={currentUrl} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />

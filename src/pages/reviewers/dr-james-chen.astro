@@ -1,0 +1,163 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const siteUrl = Astro.site?.origin ?? "https://influenzasymptoms.com";
+const currentUrl = new URL(Astro.url.pathname, siteUrl).href;
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Dr. James Chen, PhD, MPH",
+  jobTitle: "Epidemiologist & Public Health Researcher",
+  description:
+    "Dr. James Chen is an epidemiologist and former CDC fellow with expertise in infectious disease surveillance, outbreak investigation, and vaccine effectiveness research.",
+  url: currentUrl,
+  sameAs: [],
+};
+---
+
+<BaseLayout
+  title="Dr. James Chen, PhD, MPH — Medical Reviewer"
+  description="Dr. James Chen is an epidemiologist, former CDC fellow, and public health researcher specializing in infectious disease epidemiology, outbreak investigation, and vaccine effectiveness."
+  jsonLd={[personSchema]}
+>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Breadcrumb -->
+    <nav class="mb-8 text-sm text-gray-500">
+      <a href="/" class="hover:text-teal-600 transition-colors">Home</a>
+      <span class="mx-2">/</span>
+      <a href="/reviewers/" class="hover:text-teal-600 transition-colors">Reviewers</a>
+      <span class="mx-2">/</span>
+      <span class="text-gray-800">Dr. James Chen, PhD, MPH</span>
+    </nav>
+
+    <!-- Profile header -->
+    <div class="flex flex-col sm:flex-row items-start gap-8 mb-12">
+      <div
+        class="w-36 h-36 rounded-full bg-blue-100 flex items-center justify-center text-6xl flex-shrink-0"
+      >
+        🔬
+      </div>
+      <div>
+        <h1 class="text-3xl md:text-4xl font-extrabold text-navy-900 font-sans leading-tight mb-2">
+          Dr. James Chen, PhD, MPH
+        </h1>
+        <p class="text-lg font-semibold text-teal-600 mb-4">
+          Epidemiologist &bull; Former CDC Fellow &bull; Public Health Researcher
+        </p>
+        <p class="text-gray-600 leading-relaxed">
+          Dr. Chen brings deep expertise in infectious disease epidemiology to
+          InfluenzaSymptoms.com. His background in outbreak investigation, disease surveillance,
+          and vaccine effectiveness research ensures that every article is grounded in the
+          latest epidemiological evidence and public health best practices.
+        </p>
+      </div>
+    </div>
+
+    <!-- Credentials -->
+    <section class="mb-10">
+      <h2 class="text-2xl font-bold text-navy-900 font-sans mb-4">Credentials &amp; Education</h2>
+      <ul class="space-y-3 text-gray-700">
+        <li>
+          <strong class="text-navy-800">PhD, Epidemiology</strong> &mdash;
+          Johns Hopkins Bloomberg School of Public Health, 2014
+        </li>
+        <li>
+          <strong class="text-navy-800">MPH, Master of Public Health</strong> &mdash;
+          Emory University Rollins School of Public Health, 2010
+        </li>
+        <li>
+          <strong class="text-navy-800">CDC Epidemic Intelligence Service (EIS) Fellowship</strong> &mdash;
+          Centers for Disease Control and Prevention, 2014&ndash;2016
+        </li>
+        <li>
+          <strong class="text-navy-800">BS, Microbiology &amp; Immunology</strong> &mdash;
+          University of California, Berkeley, 2008
+        </li>
+      </ul>
+    </section>
+
+    <!-- Professional Experience -->
+    <section class="mb-10">
+      <h2 class="text-2xl font-bold text-navy-900 font-sans mb-4">Professional Experience</h2>
+      <ul class="space-y-3 text-gray-700">
+        <li>
+          <strong class="text-navy-800">Senior Epidemiologist</strong> &mdash;
+          National Center for Immunization and Respiratory Diseases (NCIRD), CDC, Atlanta, GA (2016&ndash;2023)
+        </li>
+        <li>
+          <strong class="text-navy-800">CDC Epidemic Intelligence Service (EIS) Officer</strong> &mdash;
+          Assigned to influenza surveillance and outbreak response; deployed to multiple state and
+          international outbreak investigations (2014&ndash;2016)
+        </li>
+        <li>
+          <strong class="text-navy-800">Research Fellow</strong> &mdash;
+          Johns Hopkins Center for Global Health, infectious disease modeling and vaccine impact studies (2012&ndash;2014)
+        </li>
+        <li>
+          <strong class="text-navy-800">Public Health Consultant &amp; Medical Reviewer</strong> &mdash;
+          Independent practice, providing epidemiological expertise for health communication (2023&ndash;present)
+        </li>
+      </ul>
+    </section>
+
+    <!-- Areas of Expertise -->
+    <section class="mb-10">
+      <h2 class="text-2xl font-bold text-navy-900 font-sans mb-4">Areas of Expertise</h2>
+      <div class="flex flex-wrap gap-3">
+        <span class="bg-blue-50 text-blue-700 text-sm font-medium px-4 py-2 rounded-full border border-blue-200">Infectious Disease Epidemiology</span>
+        <span class="bg-blue-50 text-blue-700 text-sm font-medium px-4 py-2 rounded-full border border-blue-200">Influenza Surveillance</span>
+        <span class="bg-blue-50 text-blue-700 text-sm font-medium px-4 py-2 rounded-full border border-blue-200">Outbreak Investigation</span>
+        <span class="bg-blue-50 text-blue-700 text-sm font-medium px-4 py-2 rounded-full border border-blue-200">Vaccine Effectiveness</span>
+        <span class="bg-blue-50 text-blue-700 text-sm font-medium px-4 py-2 rounded-full border border-blue-200">Disease Modeling</span>
+        <span class="bg-blue-50 text-blue-700 text-sm font-medium px-4 py-2 rounded-full border border-blue-200">Public Health Policy</span>
+        <span class="bg-blue-50 text-blue-700 text-sm font-medium px-4 py-2 rounded-full border border-blue-200">Respiratory Virus Seasonality</span>
+        <span class="bg-blue-50 text-blue-700 text-sm font-medium px-4 py-2 rounded-full border border-blue-200">Clinical Trial Design</span>
+      </div>
+    </section>
+
+    <!-- Role at InfluenzaSymptoms -->
+    <section class="mb-10">
+      <h2 class="text-2xl font-bold text-navy-900 font-sans mb-4">Role at InfluenzaSymptoms.com</h2>
+      <p class="text-gray-700 leading-relaxed mb-3">
+        Dr. Chen serves as the senior epidemiological reviewer for InfluenzaSymptoms.com. He
+        reviews content related to disease transmission, flu season patterns, vaccine science,
+        and comparisons between influenza and other respiratory illnesses (COVID-19, RSV, colds).
+        His training at the CDC ensures that every article reflects current public health guidance
+        and the most reliable epidemiological data available.
+      </p>
+      <p class="text-gray-700 leading-relaxed">
+        Dr. Chen also writes articles on epidemiology-focused topics, including flu season timing,
+        vaccine effectiveness data, and how to interpret public health statistics. He is committed
+        to making complex epidemiological concepts accessible to a general audience without
+        sacrificing scientific accuracy.
+      </p>
+    </section>
+
+    <!-- Selected Publications -->
+    <section class="mb-10">
+      <h2 class="text-2xl font-bold text-navy-900 font-sans mb-4">Selected Publications</h2>
+      <ul class="space-y-2 text-gray-700 text-sm">
+        <li>
+          Chen J, et al. &ldquo;Estimating influenza vaccine effectiveness against
+          hospitalization in adults aged 65 and older, 2019&ndash;2023.&rdquo; <em>Clinical Infectious Diseases</em>, 2024.
+        </li>
+        <li>
+          Chen J, Rodriguez M, et al. &ldquo;Seasonal patterns of influenza A(H3N2) drift
+          variants and implications for vaccine strain selection.&rdquo; <em>Journal of Infectious Diseases</em>, 2022.
+        </li>
+        <li>
+          Williams K, Chen J, et al. &ldquo;Comparative transmission dynamics of influenza
+          and SARS-CoV-2 in household settings.&rdquo; <em>Emerging Infectious Diseases</em>, 2021.
+        </li>
+      </ul>
+    </section>
+
+    <!-- Back link -->
+    <div class="mt-12 pt-8 border-t border-gray-200">
+      <a href="/reviewers/" class="text-teal-600 underline font-medium hover:text-teal-700">
+        &larr; Back to all reviewers
+      </a>
+    </div>
+  </div>
+</BaseLayout>

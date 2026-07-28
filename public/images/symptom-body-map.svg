@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" width="600" height="900">
+  <defs>
+    <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a365d;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0a2540;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#1a365d" flood-opacity="0.15"/>
+    </filter>
+    <marker id="dot" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+      <circle cx="5" cy="5" r="4" fill="#2c9a92"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="900" rx="20" fill="#fafbfc"/>
+
+  <!-- Title -->
+  <text x="300" y="45" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="800" fill="#0a2540">Flu Symptom Body Map</text>
+  <text x="300" y="70" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#6b7280">Common locations of influenza symptoms</text>
+
+  <!-- Body outline -->
+  <g filter="url(#shadow)" fill="none" stroke="url(#bodyGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Head -->
+    <ellipse cx="300" cy="130" rx="42" ry="48" />
+    <!-- Neck -->
+    <line x1="300" y1="178" x2="300" y2="198" stroke-width="3" />
+    <!-- Upper body -->
+    <path d="M240 198 Q210 250 205 320 L200 380 Q200 400 240 400 L360 400 Q400 400 400 380 L395 320 Q390 250 360 198" />
+    <!-- Left arm -->
+    <path d="M240 210 Q200 230 180 280 Q165 330 165 370" />
+    <path d="M165 370 Q155 390 150 400" />
+    <!-- Right arm -->
+    <path d="M360 210 Q400 230 420 280 Q435 330 435 370" />
+    <path d="M435 370 Q445 390 450 400" />
+    <!-- Left leg -->
+    <path d="M260 400 Q250 500 245 600 Q240 700 235 780" />
+    <path d="M235 780 L220 790" />
+    <!-- Right leg -->
+    <path d="M340 400 Q350 500 355 600 Q360 700 365 780" />
+    <path d="M365 780 L380 790" />
+  </g>
+
+  <!-- Symptom markers and labels -->
+
+  <!-- 1. Head: headache/fever -->
+  <circle cx="300" cy="100" r="8" fill="#e53e3e" opacity="0.8"/>
+  <line x1="308" y1="95" x2="420" y2="65" stroke="#e53e3e" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="424" y="47" width="160" height="36" rx="8" fill="#fff5f5" stroke="#e53e3e" stroke-width="1.5"/>
+  <text x="504" y="60" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="#c53030">Headache &amp; Fever</text>
+  <text x="504" y="75" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#e53e3e">Forehead, behind eyes</text>
+
+  <!-- 2. Nose/Throat: runny nose, sore throat -->
+  <circle cx="300" cy="150" r="7" fill="#2c9a92" opacity="0.8"/>
+  <line x1="307" y1="147" x2="420" y2="115" stroke="#2c9a92" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="424" y="97" width="160" height="52" rx="8" fill="#f0fdfa" stroke="#2c9a92" stroke-width="1.5"/>
+  <text x="504" y="112" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="#0d9488">Runny Nose</text>
+  <text x="504" y="126" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#2c9a92">Nasal congestion</text>
+  <text x="504" y="140" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="#0d9488">Sore Throat &amp; Cough</text>
+
+  <!-- 3. Chest: cough, chest discomfort -->
+  <circle cx="300" cy="250" r="9" fill="#e53e3e" opacity="0.8"/>
+  <line x1="309" y1="245" x2="420" y2="180" stroke="#e53e3e" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="424" y="162" width="160" height="36" rx="8" fill="#fff5f5" stroke="#e53e3e" stroke-width="1.5"/>
+  <text x="504" y="175" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="#c53030">Chest Discomfort</text>
+  <text x="504" y="190" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#e53e3e">Dry, persistent cough</text>
+
+  <!-- 4. Stomach: nausea (less common) -->
+  <circle cx="300" cy="330" r="7" fill="#dd6b20" opacity="0.8"/>
+  <line x1="293" y1="335" x2="180" y2="370" stroke="#dd6b20" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="16" y="354" width="160" height="36" rx="8" fill="#fffaf0" stroke="#dd6b20" stroke-width="1.5"/>
+  <text x="96" y="368" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="#c05621">Nausea (Less Common)</text>
+  <text x="96" y="382" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#dd6b20">More common in children</text>
+
+  <!-- 5. Muscles: body aches -->
+  <!-- Left arm -->
+  <circle cx="190" cy="280" r="7" fill="#2c9a92" opacity="0.8"/>
+  <line x1="183" y1="275" x2="120" y2="250" stroke="#2c9a92" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="16" y="234" width="100" height="52" rx="8" fill="#f0fdfa" stroke="#2c9a92" stroke-width="1.5"/>
+  <text x="66" y="249" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="#0d9488">Muscle Aches</text>
+  <text x="66" y="263" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#2c9a92">Arms</text>
+  <text x="66" y="277" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#2c9a92">Severe myalgia</text>
+
+  <!-- Back -->
+  <circle cx="300" cy="310" r="7" fill="#2c9a92" opacity="0.8"/>
+  <line x1="293" y1="305" x2="120" y2="280" stroke="#2c9a92" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <!-- Right leg -->
+  <circle cx="360" cy="550" r="7" fill="#2c9a92" opacity="0.8"/>
+  <line x1="368" y1="545" x2="430" y2="510" stroke="#2c9a92" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="434" y="494" width="100" height="36" rx="8" fill="#f0fdfa" stroke="#2c9a92" stroke-width="1.5"/>
+  <text x="484" y="508" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="#0d9488">Body Aches</text>
+  <text x="484" y="522" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#2c9a92">Legs &amp; joints</text>
+
+  <!-- 6. General fatigue label -->
+  <rect x="160" y="800" width="280" height="50" rx="10" fill="#1a365d"/>
+  <text x="300" y="818" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#3db5a8">⚠️  Extreme Fatigue — Whole Body</text>
+  <text x="300" y="838" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#94a3b8">Profound exhaustion, can last 2–3 weeks</text>
+
+  <!-- Legend -->
+  <g transform="translate(16, 830)">
+    <rect x="0" y="0" width="568" height="42" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+    <circle cx="25" cy="21" r="6" fill="#e53e3e" opacity="0.8"/>
+    <text x="36" y="25" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#64748b">Primary symptom</text>
+    <circle cx="160" cy="21" r="6" fill="#2c9a92" opacity="0.8"/>
+    <text x="171" y="25" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#64748b">Common symptom</text>
+    <circle cx="295" cy="21" r="6" fill="#dd6b20" opacity="0.8"/>
+    <text x="306" y="25" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#64748b">Less common</text>
+    <text x="440" y="25" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#94a3b8">Sources: CDC, WHO, NHS</text>
+  </g>
+</svg>

@@ -7,7 +7,24 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   description="Evidence-based guide to influenza symptoms. Learn the early signs, day-by-day progression, when to seek emergency care, and how flu differs from colds and COVID-19."
 >
   <!-- Hero -->
-  <section class="bg-gradient-to-br from-navy-900 via-navy-800 to-navy-700 text-white">
+  <section class="bg-gradient-to-br from-navy-900 via-navy-800 to-navy-700 text-white relative overflow-hidden">
+    <!-- Subtle background illustration -->
+    <svg class="absolute right-0 top-0 w-96 h-full opacity-5 pointer-events-none" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="200" cy="150" r="80" fill="none" stroke="white" stroke-width="1"/>
+      <circle cx="200" cy="150" r="60" fill="none" stroke="white" stroke-width="0.5"/>
+      <circle cx="200" cy="150" r="8" fill="white"/>
+      <line x1="200" y1="70" x2="200" y2="50" stroke="white" stroke-width="1"/>
+      <line x1="200" y1="230" x2="200" y2="250" stroke="white" stroke-width="1"/>
+      <line x1="120" y1="150" x2="100" y2="150" stroke="white" stroke-width="1"/>
+      <line x1="280" y1="150" x2="300" y2="150" stroke="white" stroke-width="1"/>
+      <line x1="143" y1="93" x2="129" y2="79" stroke="white" stroke-width="1"/>
+      <line x1="257" y1="93" x2="271" y2="79" stroke="white" stroke-width="1"/>
+      <line x1="143" y1="207" x2="129" y2="221" stroke="white" stroke-width="1"/>
+      <line x1="257" y1="207" x2="271" y2="221" stroke="white" stroke-width="1"/>
+      <!-- Stethoscope -->
+      <path d="M 50 300 Q 50 250 100 250 Q 150 250 150 300 L 150 400" fill="none" stroke="white" stroke-width="2"/>
+      <circle cx="150" cy="415" r="20" fill="none" stroke="white" stroke-width="2"/>
+    </svg>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
       <div class="max-w-3xl">
         <span class="inline-block bg-teal-600/30 text-teal-300 text-sm font-semibold px-4 py-1.5 rounded-full mb-6">

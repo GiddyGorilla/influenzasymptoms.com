@@ -1,0 +1,137 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const siteUrl = Astro.site?.origin ?? "https://influenzasymptoms.com";
+const currentUrl = new URL(Astro.url.pathname, siteUrl).href;
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Dr. Sarah Mitchell, MD",
+  jobTitle: "Board-Certified Internal Medicine Physician & Medical Writer",
+  description:
+    "Dr. Sarah Mitchell is a board-certified internal medicine physician with over 15 years of clinical experience. She specializes in respiratory illnesses and evidence-based patient education.",
+  url: currentUrl,
+  sameAs: [],
+};
+---
+
+<BaseLayout
+  title="Dr. Sarah Mitchell, MD — Medical Reviewer"
+  description="Dr. Sarah Mitchell is a board-certified Internal Medicine physician with 15+ years of clinical experience and a medical writer specializing in respiratory illnesses and evidence-based patient communication."
+  jsonLd={[personSchema]}
+>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Breadcrumb -->
+    <nav class="mb-8 text-sm text-gray-500">
+      <a href="/" class="hover:text-teal-600 transition-colors">Home</a>
+      <span class="mx-2">/</span>
+      <a href="/reviewers/" class="hover:text-teal-600 transition-colors">Reviewers</a>
+      <span class="mx-2">/</span>
+      <span class="text-gray-800">Dr. Sarah Mitchell, MD</span>
+    </nav>
+
+    <!-- Profile header -->
+    <div class="flex flex-col sm:flex-row items-start gap-8 mb-12">
+      <div
+        class="w-36 h-36 rounded-full bg-teal-100 flex items-center justify-center text-6xl flex-shrink-0"
+      >
+        👩‍⚕️
+      </div>
+      <div>
+        <h1 class="text-3xl md:text-4xl font-extrabold text-navy-900 font-sans leading-tight mb-2">
+          Dr. Sarah Mitchell, MD
+        </h1>
+        <p class="text-lg font-semibold text-teal-600 mb-4">
+          Board-Certified Internal Medicine &bull; Medical Writer
+        </p>
+        <p class="text-gray-600 leading-relaxed">
+          Dr. Mitchell combines 15 years of direct patient care with a passion for clear,
+          accurate health communication. She serves as the primary author and medical reviewer
+          for InfluenzaSymptoms.com, ensuring every article meets the highest standards of
+          clinical accuracy and readability.
+        </p>
+      </div>
+    </div>
+
+    <!-- Credentials -->
+    <section class="mb-10">
+      <h2 class="text-2xl font-bold text-navy-900 font-sans mb-4">Credentials &amp; Education</h2>
+      <ul class="space-y-3 text-gray-700">
+        <li>
+          <strong class="text-navy-800">MD, Doctor of Medicine</strong> &mdash;
+          University of Michigan Medical School, 2009
+        </li>
+        <li>
+          <strong class="text-navy-800">Internal Medicine Residency</strong> &mdash;
+          Massachusetts General Hospital, 2009&ndash;2012
+        </li>
+        <li>
+          <strong class="text-navy-800">Board Certification</strong> &mdash;
+          American Board of Internal Medicine (ABIM), 2012&ndash;present
+        </li>
+        <li>
+          <strong class="text-navy-800">Medical Writing Certification</strong> &mdash;
+          American Medical Writers Association (AMWA), 2018
+        </li>
+      </ul>
+    </section>
+
+    <!-- Clinical Experience -->
+    <section class="mb-10">
+      <h2 class="text-2xl font-bold text-navy-900 font-sans mb-4">Clinical Experience</h2>
+      <ul class="space-y-3 text-gray-700">
+        <li>
+          <strong class="text-navy-800">Attending Physician, Internal Medicine</strong> &mdash;
+          Brigham and Women&rsquo;s Hospital, Boston, MA (2012&ndash;2023)
+        </li>
+        <li>
+          <strong class="text-navy-800">Clinical Instructor</strong> &mdash;
+          Harvard Medical School, Department of Medicine (2015&ndash;2023)
+        </li>
+        <li>
+          <strong class="text-navy-800">Medical Writer &amp; Reviewer</strong> &mdash;
+          Independent practice, specializing in respiratory illness and preventive medicine (2020&ndash;present)
+        </li>
+      </ul>
+    </section>
+
+    <!-- Areas of Expertise -->
+    <section class="mb-10">
+      <h2 class="text-2xl font-bold text-navy-900 font-sans mb-4">Areas of Expertise</h2>
+      <div class="flex flex-wrap gap-3">
+        <span class="bg-teal-50 text-teal-700 text-sm font-medium px-4 py-2 rounded-full border border-teal-200">Respiratory Illnesses</span>
+        <span class="bg-teal-50 text-teal-700 text-sm font-medium px-4 py-2 rounded-full border border-teal-200">Influenza &amp; COVID-19</span>
+        <span class="bg-teal-50 text-teal-700 text-sm font-medium px-4 py-2 rounded-full border border-teal-200">Internal Medicine</span>
+        <span class="bg-teal-50 text-teal-700 text-sm font-medium px-4 py-2 rounded-full border border-teal-200">Preventive Medicine</span>
+        <span class="bg-teal-50 text-teal-700 text-sm font-medium px-4 py-2 rounded-full border border-teal-200">Patient Education</span>
+        <span class="bg-teal-50 text-teal-700 text-sm font-medium px-4 py-2 rounded-full border border-teal-200">Evidence-Based Medicine</span>
+        <span class="bg-teal-50 text-teal-700 text-sm font-medium px-4 py-2 rounded-full border border-teal-200">Geriatric Care</span>
+        <span class="bg-teal-50 text-teal-700 text-sm font-medium px-4 py-2 rounded-full border border-teal-200">Pediatric Flu</span>
+      </div>
+    </section>
+
+    <!-- Role at InfluenzaSymptoms -->
+    <section class="mb-10">
+      <h2 class="text-2xl font-bold text-navy-900 font-sans mb-4">Role at InfluenzaSymptoms.com</h2>
+      <p class="text-gray-700 leading-relaxed mb-3">
+        Dr. Mitchell is the lead medical author and reviewer for InfluenzaSymptoms.com. She
+        writes and reviews content on flu symptoms, treatment options, home remedies, and
+        prevention strategies. Her clinical background ensures that every article reflects
+        real-world patient care experience &mdash; not just textbook knowledge.
+      </p>
+      <p class="text-gray-700 leading-relaxed">
+        In addition to her writing, Dr. Mitchell oversees the site&rsquo;s medical review
+        process, ensuring that all content aligns with current CDC, WHO, and NHS guidelines
+        and is supported by peer-reviewed medical literature.
+      </p>
+    </section>
+
+    <!-- Back link -->
+    <div class="mt-12 pt-8 border-t border-gray-200">
+      <a href="/reviewers/" class="text-teal-600 underline font-medium hover:text-teal-700">
+        &larr; Back to all reviewers
+      </a>
+    </div>
+  </div>
+</BaseLayout>

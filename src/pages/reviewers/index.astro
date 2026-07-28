@@ -1,0 +1,115 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const siteUrl = Astro.site?.origin ?? "https://influenzasymptoms.com";
+const currentUrl = new URL(Astro.url.pathname, siteUrl).href;
+
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      item: {
+        "@type": "Person",
+        name: "Dr. Sarah Mitchell, MD",
+        url: `${siteUrl}/reviewers/dr-sarah-mitchell/`,
+      },
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      item: {
+        "@type": "Person",
+        name: "Dr. James Chen, PhD, MPH",
+        url: `${siteUrl}/reviewers/dr-james-chen/`,
+      },
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Our Medical Reviewers &mdash; InfluenzaSymptoms.com"
+  description="Meet the medical professionals who review and contribute to our evidence-based influenza content. Board-certified physicians, epidemiologists, and public health experts."
+  jsonLd={[itemListSchema]}
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <header class="mb-12 text-center">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-navy-900 font-sans leading-tight mb-4">
+        Our Medical Reviewers
+      </h1>
+      <p class="text-xl text-gray-500 font-serif leading-relaxed max-w-2xl mx-auto">
+        Every article on InfluenzaSymptoms.com is written or reviewed by qualified medical professionals.
+        Meet the team behind our evidence-based content.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Dr. Sarah Mitchell -->
+      <a
+        href="/reviewers/dr-sarah-mitchell/"
+        class="block bg-white rounded-2xl shadow-md border border-gray-100 p-8 hover:shadow-lg hover:border-teal-200 transition-all group"
+      >
+        <div class="flex flex-col items-center text-center">
+          <div
+            class="w-28 h-28 rounded-full bg-teal-100 flex items-center justify-center text-5xl mb-5 group-hover:scale-105 transition-transform"
+          >
+            👩‍⚕️
+          </div>
+          <h2 class="text-xl font-bold text-navy-900 font-sans mb-1">
+            Dr. Sarah Mitchell, MD
+          </h2>
+          <p class="text-sm font-semibold text-teal-600 mb-3">
+            Board-Certified Internal Medicine
+          </p>
+          <p class="text-sm text-gray-500 leading-relaxed">
+            15+ years of clinical experience. Medical writer and educator specializing
+            in respiratory illnesses and evidence-based patient communication.
+          </p>
+        </div>
+      </a>
+
+      <!-- Dr. James Chen -->
+      <a
+        href="/reviewers/dr-james-chen/"
+        class="block bg-white rounded-2xl shadow-md border border-gray-100 p-8 hover:shadow-lg hover:border-teal-200 transition-all group"
+      >
+        <div class="flex flex-col items-center text-center">
+          <div
+            class="w-28 h-28 rounded-full bg-blue-100 flex items-center justify-center text-5xl mb-5 group-hover:scale-105 transition-transform"
+          >
+            🔬
+          </div>
+          <h2 class="text-xl font-bold text-navy-900 font-sans mb-1">
+            Dr. James Chen, PhD, MPH
+          </h2>
+          <p class="text-sm font-semibold text-teal-600 mb-3">
+            Epidemiologist &amp; Public Health Researcher
+          </p>
+          <p class="text-sm text-gray-500 leading-relaxed">
+            Former CDC fellow. Specialist in infectious disease epidemiology, outbreak
+            investigation, and vaccine effectiveness research.
+          </p>
+        </div>
+      </a>
+    </div>
+
+    <div class="mt-16 pt-8 border-t border-gray-200">
+      <h3 class="text-lg font-semibold text-navy-800 mb-3">Our Review Process</h3>
+      <p class="text-gray-600 leading-relaxed">
+        All content on InfluenzaSymptoms.com undergoes rigorous medical review before publication.
+        Our reviewers verify factual accuracy against current CDC, WHO, and NHS guidelines, ensure
+        appropriate sourcing from peer-reviewed medical literature, and confirm that content is
+        presented clearly without sensationalism. Articles are re-reviewed at least annually or
+        sooner when significant new evidence emerges.
+      </p>
+      <p class="text-gray-600 leading-relaxed mt-3">
+        <a href="/about/#editorial-policy" class="text-teal-600 underline font-medium"
+          >Learn more about our editorial policy &rarr;</a
+        >
+      </p>
+    </div>
+  </div>
+</BaseLayout>

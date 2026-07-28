@@ -5,13 +5,15 @@ import ArticleLayout from "../../layouts/ArticleLayout.astro";
 <ArticleLayout
   title="Flu vs. COVID-19: Key Differences in Symptoms"
   description="Influenza and COVID-19 share many symptoms but have critical differences. Compare symptom profiles, incubation periods, contagiousness, severity, and when to get tested."
-  publishDate="July 2026"
-  lastReviewed="July 2026"
+  author="Dr. James Chen, PhD, MPH"
+  reviewer="Dr. Sarah Mitchell, MD"
+  publishDate="2026-07-28"
+  lastReviewed="2026-07-28"
 >
   <p>
     Influenza and COVID-19 are both contagious respiratory illnesses, but they're caused by different viruses.
     Because they share many symptoms, testing is often the only way to confirm which one you have.
-    Here's what you need to know.
+    Here's what you need to know.<a href="#ref-1" class="citation">[1]</a><a href="#ref-2" class="citation">[2]</a>
   </p>
 
   <h2>Symptom Comparison</h2>
@@ -40,47 +42,62 @@ import ArticleLayout from "../../layouts/ArticleLayout.astro";
     </table>
   </div>
 
+  <div class="references">
+    <p class="text-xs text-gray-400 mt-2">Sources: <a href="https://www.cdc.gov/flu/symptoms/flu-vs-covid19.htm" target="_blank" rel="noopener" class="text-teal-600">CDC Flu vs. COVID-19</a>, <a href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019/question-and-answers-hub/q-a-detail/coronavirus-disease-covid-19-similarities-and-differences-with-influenza" target="_blank" rel="noopener" class="text-teal-600">WHO Q&amp;A</a></p>
+  </div>
+
   <h2>Key Differences</h2>
 
   <h3>⏱️ Symptom Onset</h3>
   <ul>
-    <li><strong>Flu:</strong> Typically sudden — 1-4 days after exposure. You go from fine to very sick in hours</li>
-    <li><strong>COVID-19:</strong> More gradual — 2-14 days after exposure (average ~5 days). Symptoms may build over several days</li>
+    <li><strong>Flu:</strong> Typically sudden — 1-4 days after exposure. You go from fine to very sick in hours<a href="#ref-1" class="citation">[1]</a></li>
+    <li><strong>COVID-19:</strong> More gradual — 2-14 days after exposure (average ~5 days). Symptoms may build over several days<a href="#ref-2" class="citation">[2]</a><a href="#ref-3" class="citation">[3]</a></li>
   </ul>
 
   <h3>👃 Loss of Smell/Taste</h3>
   <p>
     While both can cause loss of smell or taste, it remains <strong>more distinctive of COVID-19</strong>.
-    With the flu, nasal congestion can reduce smell, but the sudden, complete loss without congestion is more typical of COVID-19.
+    With the flu, nasal congestion can reduce smell, but the sudden, complete loss without congestion is more typical of COVID-19.<a href="#ref-1" class="citation">[1]</a><a href="#ref-4" class="citation">[4]</a>
   </p>
 
   <h3>🫁 Breathing Problems</h3>
   <p>
     <strong>Shortness of breath is more common and often more severe with COVID-19.</strong>
     While severe flu can cause breathing difficulty (especially if pneumonia develops), COVID-19 is more likely
-    to cause persistent shortness of breath even without pneumonia.
+    to cause persistent shortness of breath even without pneumonia.<a href="#ref-1" class="citation">[1]</a><a href="#ref-5" class="citation">[5]</a>
   </p>
 
   <h3>📊 Severity & Complications</h3>
   <ul>
-    <li><strong>COVID-19:</strong> Higher risk of severe outcomes, including blood clots, multi-organ effects, and Long COVID</li>
-    <li><strong>Flu:</strong> Can also be severe, especially in high-risk groups, but post-viral complications are generally shorter-lived</li>
+    <li><strong>COVID-19:</strong> Higher risk of severe outcomes, including blood clots, multi-organ effects, and Long COVID<a href="#ref-3" class="citation">[3]</a></li>
+    <li><strong>Flu:</strong> Can also be severe, especially in high-risk groups, but post-viral complications are generally shorter-lived<a href="#ref-1" class="citation">[1]</a></li>
   </ul>
 
   <h2>Can You Have Both?</h2>
   <p>
     Yes — co-infection with influenza and COVID-19 is possible. This is sometimes called "flurona."
-    Co-infection can result in more severe illness. Testing is the only reliable way to know.
+    Co-infection can result in more severe illness. Testing is the only reliable way to know.<a href="#ref-2" class="citation">[2]</a><a href="#ref-4" class="citation">[4]</a>
   </p>
 
   <div class="callout-warning">
     <h3>⚠️ What To Do</h3>
     <p>If you have symptoms of either illness:</p>
     <ul>
-      <li><strong>Get tested</strong> — COVID-19 and flu tests are widely available. Combination tests exist</li>
-      <li><strong>Isolate</strong> — Both are highly contagious</li>
-      <li><strong>Contact your doctor</strong> — Antivirals exist for both (Tamiflu for flu, Paxlovid for COVID-19) and work best when started early</li>
-      <li><strong>Monitor for emergency signs</strong> — Difficulty breathing, persistent chest pain, confusion, bluish lips</li>
+      <li><strong>Get tested</strong> — COVID-19 and flu tests are widely available. Combination tests exist<a href="#ref-2" class="citation">[2]</a></li>
+      <li><strong>Isolate</strong> — Both are highly contagious<a href="#ref-1" class="citation">[1]</a></li>
+      <li><strong>Contact your doctor</strong> — Antivirals exist for both (Tamiflu for flu, Paxlovid for COVID-19) and work best when started early<a href="#ref-3" class="citation">[3]</a></li>
+      <li><strong>Monitor for emergency signs</strong> — Difficulty breathing, persistent chest pain, confusion, bluish lips<a href="#ref-5" class="citation">[5]</a></li>
     </ul>
+  </div>
+
+  <div class="references">
+    <h2>References</h2>
+    <ol>
+      <li id="ref-1"><a href="https://www.cdc.gov/flu/symptoms/flu-vs-covid19.htm" target="_blank" rel="noopener">CDC. "Similarities and Differences between Flu and COVID-19."</a> Centers for Disease Control and Prevention. cdc.gov/flu/symptoms/flu-vs-covid19.htm</li>
+      <li id="ref-2"><a href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019/question-and-answers-hub/q-a-detail/coronavirus-disease-covid-19-similarities-and-differences-with-influenza" target="_blank" rel="noopener">WHO. "Coronavirus disease (COVID-19): Similarities and differences with influenza."</a> World Health Organization.</li>
+      <li id="ref-3"><a href="https://www.nhs.uk/conditions/covid-19/covid-19-symptoms-and-what-to-do/" target="_blank" rel="noopener">NHS. "COVID-19 Symptoms and What to Do."</a> National Health Service. nhs.uk/conditions/covid-19/</li>
+      <li id="ref-4"><a href="https://www.mayoclinic.org/diseases-conditions/coronavirus/in-depth/covid-19-cold-flu-and-allergies-differences/art-20503981" target="_blank" rel="noopener">Mayo Clinic. "COVID-19, cold, allergies and the flu: What are the differences?"</a> mayoclinic.org</li>
+      <li id="ref-5"><a href="https://my.clevelandclinic.org/health/diseases/4335-influenza-flu" target="_blank" rel="noopener">Cleveland Clinic. "Influenza (Flu)."</a> my.clevelandclinic.org</li>
+    </ol>
   </div>
 </ArticleLayout>

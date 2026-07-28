@@ -5,13 +5,15 @@ import ArticleLayout from "../../layouts/ArticleLayout.astro";
 <ArticleLayout
   title="Flu vs. Cold: How to Tell the Difference"
   description="Can't tell if it's the flu or a common cold? Clear comparison of symptoms, onset, severity, and duration. Know the key differences and when to seek care."
-  publishDate="July 2026"
-  lastReviewed="July 2026"
+  author="Dr. James Chen, PhD, MPH"
+  reviewer="Dr. Sarah Mitchell, MD"
+  publishDate="2026-07-28"
+  lastReviewed="2026-07-28"
 >
   <p>
     The flu and the common cold are both respiratory illnesses, but they're caused by different viruses.
     Knowing the difference matters — the flu can lead to serious complications, while colds rarely do.
-    Here's how to tell them apart.
+    Here's how to tell them apart.<a href="#ref-1" class="citation">[1]</a><a href="#ref-2" class="citation">[2]</a>
   </p>
 
   <h2>Quick Comparison Chart</h2>
@@ -84,23 +86,109 @@ import ArticleLayout from "../../layouts/ArticleLayout.astro";
     </table>
   </div>
 
+  <h2>Visual Symptom Severity Comparison</h2>
+  <div class="infographic">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 340" width="100%" height="auto" role="img" aria-labelledby="flu-vs-cold-title">
+      <title id="flu-vs-cold-title">Flu vs Cold symptom severity comparison chart</title>
+      <defs>
+        <linearGradient id="fluBarGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#2c9a92"/>
+          <stop offset="100%" stop-color="#0d9488"/>
+        </linearGradient>
+        <linearGradient id="coldBarGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#94a3b8"/>
+          <stop offset="100%" stop-color="#64748b"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Background -->
+      <rect width="700" height="340" rx="12" fill="#fafbfc"/>
+
+      <!-- Title -->
+      <text x="350" y="30" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#0a2540">Symptom Severity: Flu vs. Cold</text>
+
+      <!-- Labels -->
+      <text x="150" y="62" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#0d9488">Influenza</text>
+      <text x="450" y="62" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#64748b">Common Cold</text>
+
+      <!-- Symptom rows: Fever -->
+      <text x="10" y="100" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#334155">Fever</text>
+      <rect x="85" y="88" width="215" height="14" rx="3" fill="url(#fluBarGrad)"/>
+      <rect x="385" y="88" width="45" height="14" rx="3" fill="url(#coldBarGrad)"/>
+
+      <!-- Body Aches -->
+      <text x="10" y="130" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#334155">Body Aches</text>
+      <rect x="85" y="118" width="230" height="14" rx="3" fill="url(#fluBarGrad)"/>
+      <rect x="385" y="118" width="50" height="14" rx="3" fill="url(#coldBarGrad)"/>
+
+      <!-- Fatigue -->
+      <text x="10" y="160" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#334155">Fatigue</text>
+      <rect x="85" y="148" width="240" height="14" rx="3" fill="url(#fluBarGrad)"/>
+      <rect x="385" y="148" width="60" height="14" rx="3" fill="url(#coldBarGrad)"/>
+
+      <!-- Cough -->
+      <text x="10" y="190" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#334155">Cough</text>
+      <rect x="85" y="178" width="200" height="14" rx="3" fill="url(#fluBarGrad)"/>
+      <rect x="385" y="178" width="100" height="14" rx="3" fill="url(#coldBarGrad)"/>
+
+      <!-- Headache -->
+      <text x="10" y="220" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#334155">Headache</text>
+      <rect x="85" y="208" width="180" height="14" rx="3" fill="url(#fluBarGrad)"/>
+      <rect x="385" y="208" width="35" height="14" rx="3" fill="url(#coldBarGrad)"/>
+
+      <!-- Sneezing -->
+      <text x="10" y="250" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#334155">Sneezing</text>
+      <rect x="85" y="238" width="70" height="14" rx="3" fill="url(#fluBarGrad)"/>
+      <rect x="385" y="238" width="170" height="14" rx="3" fill="url(#coldBarGrad)"/>
+
+      <!-- Sore Throat -->
+      <text x="10" y="280" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#334155">Sore Throat</text>
+      <rect x="85" y="268" width="90" height="14" rx="3" fill="url(#fluBarGrad)"/>
+      <rect x="385" y="268" width="180" height="14" rx="3" fill="url(#coldBarGrad)"/>
+
+      <!-- Runny Nose -->
+      <text x="10" y="310" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#334155">Runny Nose</text>
+      <rect x="85" y="298" width="80" height="14" rx="3" fill="url(#fluBarGrad)"/>
+      <rect x="385" y="298" width="200" height="14" rx="3" fill="url(#coldBarGrad)"/>
+
+      <!-- Scale -->
+      <text x="310" y="328" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#94a3b8">Severe →</text>
+      <text x="610" y="328" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#94a3b8">← Mild</text>
+    </svg>
+  </div>
+
+  <div class="references">
+    <p class="text-xs text-gray-400 mt-2">Sources: <a href="https://www.cdc.gov/flu/symptoms/coldflu.htm" target="_blank" rel="noopener" class="text-teal-600">CDC Cold vs. Flu</a>, <a href="https://www.nhs.uk/conditions/common-cold/" target="_blank" rel="noopener" class="text-teal-600">NHS Common Cold</a></p>
+  </div>
+
   <h2>The "Symptom Severity Test"</h2>
-  <p>A simple way to think about it:</p>
+  <p>A simple way to think about it:<a href="#ref-1" class="citation">[1]</a></p>
   <ul>
-    <li><strong>Cold:</strong> You feel unwell but can usually function. Symptoms are "above the neck" — runny nose, sneezing, sore throat.</li>
-    <li><strong>Flu:</strong> You feel too sick to function. Symptoms are "whole-body" — fever, severe aches, crushing fatigue. The thought of getting out of bed feels impossible.</li>
+    <li><strong>Cold:</strong> You feel unwell but can usually function. Symptoms are "above the neck" — runny nose, sneezing, sore throat.<a href="#ref-3" class="citation">[3]</a></li>
+    <li><strong>Flu:</strong> You feel too sick to function. Symptoms are "whole-body" — fever, severe aches, crushing fatigue. The thought of getting out of bed feels impossible.<a href="#ref-1" class="citation">[1]</a><a href="#ref-4" class="citation">[4]</a></li>
   </ul>
 
   <div class="callout-info">
     <strong>Key takeaway:</strong> If symptoms came on <em>suddenly</em> and you feel like you've been "hit by a truck," it's more likely the flu.
-    If symptoms crept up <em>gradually</em> over a day or two, it's more likely a cold.
+    If symptoms crept up <em>gradually</em> over a day or two, it's more likely a cold.<a href="#ref-1" class="citation">[1]</a><a href="#ref-3" class="citation">[3]</a>
   </div>
 
   <h2>Why It Matters</h2>
   <p>Distinguishing between flu and cold is important because:</p>
   <ul>
-    <li><strong>Antiviral treatment:</strong> Prescription antivirals (Tamiflu, Xofluza) work for flu — not for colds — and must be started within 48 hours</li>
-    <li><strong>Complication risk:</strong> Flu can lead to pneumonia, especially in high-risk groups. Colds rarely do</li>
-    <li><strong>When to isolate:</strong> Flu requires more careful isolation to protect vulnerable people</li>
+    <li><strong>Antiviral treatment:</strong> Prescription antivirals (Tamiflu, Xofluza) work for flu — not for colds — and must be started within 48 hours<a href="#ref-2" class="citation">[2]</a><a href="#ref-5" class="citation">[5]</a></li>
+    <li><strong>Complication risk:</strong> Flu can lead to pneumonia, especially in high-risk groups. Colds rarely do<a href="#ref-1" class="citation">[1]</a></li>
+    <li><strong>When to isolate:</strong> Flu requires more careful isolation to protect vulnerable people<a href="#ref-4" class="citation">[4]</a></li>
   </ul>
+
+  <div class="references">
+    <h2>References</h2>
+    <ol>
+      <li id="ref-1"><a href="https://www.cdc.gov/flu/symptoms/coldflu.htm" target="_blank" rel="noopener">CDC. "Cold Versus Flu."</a> Centers for Disease Control and Prevention. cdc.gov/flu/symptoms/coldflu.htm</li>
+      <li id="ref-2"><a href="https://www.who.int/news-room/fact-sheets/detail/influenza-(seasonal)" target="_blank" rel="noopener">WHO. "Influenza (Seasonal)."</a> World Health Organization. who.int/news-room/fact-sheets/detail/influenza-(seasonal)</li>
+      <li id="ref-3"><a href="https://www.nhs.uk/conditions/common-cold/" target="_blank" rel="noopener">NHS. "Common Cold."</a> National Health Service. nhs.uk/conditions/common-cold/</li>
+      <li id="ref-4"><a href="https://www.mayoclinic.org/diseases-conditions/flu/symptoms-causes/syc-20351719" target="_blank" rel="noopener">Mayo Clinic. "Influenza (Flu) — Symptoms &amp; Causes."</a> mayoclinic.org</li>
+      <li id="ref-5"><a href="https://www.nhs.uk/conditions/flu/" target="_blank" rel="noopener">NHS. "Flu."</a> National Health Service. nhs.uk/conditions/flu/</li>
+    </ol>
+  </div>
 </ArticleLayout>
