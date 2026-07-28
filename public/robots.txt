@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://influenzasymptoms.com/sitemap-index.xml

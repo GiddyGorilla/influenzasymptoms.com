@@ -8,15 +8,112 @@ export interface Props {
   author?: string;
   reviewer?: string;
   image?: string;
+  faqItems?: { question: string; answer: string }[];
 }
 const {
   title, description, publishDate, lastReviewed,
   author = "InfluenzaSymptoms Editorial Team",
-  reviewer, image,
+  reviewer, image, faqItems,
 } = Astro.props;
+
+// Render slot content to string for FAQ extraction
+const slotContent = await Astro.slots.render("default");
+
+// --- FAQ auto-detection from headings ---
+const questionWords = /^(How|What|When|Where|Why|Can|Do|Is|Are|Should|Does|Will|Which|Who)\s/i;
+
+function extractFAQs(html: string): { question: string; answer: string }[] {
+  // Match <h2> and <h3> blocks with their content until next heading
+  const headingRegex = /<(h[23])\b[^>]*>(.*?)<\/\1>/gi;
+  const matches: { tag: string; text: string; index: number; endIndex: number }[] = [];
+  let m: RegExpExecArray | null;
+  while ((m = headingRegex.exec(html)) !== null) {
+    const text = m[2].replace(/<[^>]+>/g, "").trim();
+    matches.push({ tag: m[1], text, index: m.index, endIndex: m.index + m[0].length });
+  }
+
+  const faqs: { question: string; answer: string }[] = [];
+  for (let i = 0; i < matches.length; i++) {
+    const heading = matches[i];
+    const isQuestion = heading.text.endsWith("?") || questionWords.test(heading.text);
+    if (!isQuestion) continue;
+
+    // Extract answer: text between this heading and the next heading
+    const nextHeadingIndex = i + 1 < matches.length ? matches[i + 1].index : html.length;
+    let answerHtml = html.slice(heading.endIndex, nextHeadingIndex);
+    // Strip HTML tags for plain text answer
+    const answerText = answerHtml.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+    if (answerText.length > 0) {
+      faqs.push({ question: heading.text, answer: answerText.slice(0, 300) }); // Truncate long answers
+    }
+  }
+  return faqs;
+}
+
+const detectedFAQs = faqItems ?? extractFAQs(slotContent);
+
+// --- Schema.org: MedicalWebPage ---
+const siteUrl = Astro.site?.origin ?? "https://influenzasymptoms.com";
+const currentUrl = new URL(Astro.url.pathname, siteUrl).href;
+
+const medicalWebPageSchema: Record<string, any> = {
+  "@context": "https://schema.org",
+  "@type": "MedicalWebPage",
+  headline: title,
+  description: description,
+  url: currentUrl,
+  author: {
+    "@type": "Organization",
+    name: author,
+  },
+  about: {
+    "@type": "MedicalCondition",
+    name: "Influenza",
+  },
+};
+
+if (publishDate) {
+  medicalWebPageSchema.datePublished = publishDate;
+}
+if (lastReviewed) {
+  medicalWebPageSchema.dateReviewed = lastReviewed;
+  medicalWebPageSchema.lastReviewed = lastReviewed;
+}
+if (reviewer) {
+  medicalWebPageSchema.reviewedBy = {
+    "@type": "Person",
+    name: reviewer,
+  };
+}
+
+// --- Schema.org: FAQ (if questions detected) ---
+const faqSchema: Record<string, any> | null =
+  detectedFAQs.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: detectedFAQs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer,
+          },
+        })),
+      }
+    : null;
+
+// Build article-specific schemas
+const articleSchemas: Record<string, any>[] = [medicalWebPageSchema];
+if (faqSchema) articleSchemas.push(faqSchema);
 ---
 
-<BaseLayout title={title} description={description} image={image}>
+<BaseLayout
+  title={title}
+  description={description}
+  image={image}
+  jsonLd={articleSchemas}
+>
   <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <!-- Article header -->
     <header class="mb-10">
@@ -53,7 +150,7 @@ const {
 
     <!-- Article body -->
     <div class="prose max-w-none">
-      <slot />
+      <Fragment set:html={slotContent} />
     </div>
 
     <!-- Sources section placeholder -->

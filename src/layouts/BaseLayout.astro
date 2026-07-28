@@ -4,9 +4,86 @@ export interface Props {
   title: string;
   description: string;
   image?: string;
+  jsonLd?: Record<string, any>[];
 }
-const { title, description, image } = Astro.props;
+const { title, description, image, jsonLd = [] } = Astro.props;
 const fullTitle = `${title} | InfluenzaSymptoms.com`;
+const siteUrl = Astro.site?.origin ?? "https://influenzasymptoms.com";
+const currentUrl = new URL(Astro.url.pathname, siteUrl).href;
+
+// --- Schema.org: Organization ---
+const organizationSchema: Record<string, any> = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "InfluenzaSymptoms.com",
+  url: siteUrl,
+  sameAs: [],
+};
+
+// --- Schema.org: WebSite ---
+const webSiteSchema: Record<string, any> = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "InfluenzaSymptoms.com",
+  url: siteUrl,
+  description:
+    "Evidence-based medical information about influenza symptoms, treatment, and prevention.",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${siteUrl}/search?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
+};
+
+// --- BreadcrumbList (auto-generated from URL path for non-root pages) ---
+function generateBreadcrumbs(pathname: string): Record<string, any> | null {
+  if (pathname === "/" || pathname === "") return null;
+  const segments = pathname.replace(/^\/|\/$/g, "").split("/");
+  if (segments.length === 0 || segments[0] === "") return null;
+
+  const items: Record<string, any>[] = [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: siteUrl,
+    },
+  ];
+
+  let accumulatedPath = "";
+  segments.forEach((seg, i) => {
+    if (!seg) return;
+    accumulatedPath += "/" + seg;
+    const name = seg
+      .replace(/-/g, " ")
+      .replace(/\b\w/g, (c) => c.toUpperCase());
+    items.push({
+      "@type": "ListItem",
+      position: i + 2,
+      name,
+      item: `${siteUrl}${accumulatedPath}/`,
+    });
+  });
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items,
+  };
+}
+
+const breadcrumbSchema = generateBreadcrumbs(Astro.url.pathname);
+
+// Build combined JSON-LD array
+const allSchemas: Record<string, any>[] = [
+  organizationSchema,
+  webSiteSchema,
+];
+if (breadcrumbSchema) allSchemas.push(breadcrumbSchema);
+if (jsonLd.length > 0) allSchemas.push(...jsonLd);
 ---
 
 <!doctype html>
@@ -25,7 +102,10 @@ const fullTitle = `${title} | InfluenzaSymptoms.com`;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+    <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
     <title>{fullTitle}</title>
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(allSchemas.length === 1 ? allSchemas[0] : { "@context": "https://schema.org", "@graph": allSchemas.map(s => { const { "@context": _, ...rest } = s; return rest; }) })} />
   </head>
   <body>
     <!-- Emergency banner -->
@@ -49,12 +129,43 @@ const fullTitle = `${title} | InfluenzaSymptoms.com`;
             <a href="/treatment/" class="text-sm font-medium text-gray-600 hover:text-navy-800 transition-colors">Treatment</a>
             <a href="/prevention/" class="text-sm font-medium text-gray-600 hover:text-navy-800 transition-colors">Prevention</a>
           </div>
-          <button class="md:hidden text-gray-600" aria-label="Menu">
+
+          <!-- Search -->
+          <div class="relative" id="search-wrapper">
+            <div class="flex items-center gap-2 bg-gray-100 rounded-lg px-3 py-2 transition-colors focus-within:bg-white focus-within:ring-2 focus-within:ring-teal-500 focus-within:shadow-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              <input
+                type="text"
+                id="search"
+                placeholder="Search symptoms, treatments..."
+                class="bg-transparent border-none outline-none text-sm text-gray-700 placeholder-gray-400 w-48 transition-all focus:w-64"
+                autocomplete="off"
+                aria-label="Search the site"
+              />
+            </div>
+            <div id="search-results" class="absolute top-full mt-2 right-0 w-96 max-h-96 overflow-y-auto bg-white rounded-xl shadow-xl border border-gray-200 hidden z-50"></div>
+          </div>
+          <button id="mobile-menu-btn" class="md:hidden text-gray-600" aria-label="Menu">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
         </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 pb-4">
+          <a href="/symptoms/" class="block px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50">Symptoms</a>
+          <a href="/compare/" class="block px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50">Compare</a>
+          <a href="/when-to-seek-help/" class="block px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50">When to Seek Help</a>
+          <a href="/treatment/" class="block px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50">Treatment</a>
+          <a href="/prevention/" class="block px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50">Prevention</a>
+        </div>
+        <script>
+          document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+          });
+        </script>
       </nav>
     </header>
 
@@ -106,5 +217,143 @@ const fullTitle = `${title} | InfluenzaSymptoms.com`;
         </div>
       </div>
     </footer>
+
+    <!-- Pagefind search -->
+    <script src="/pagefind/pagefind.js" defer></script>
+    <script is:inline>
+        const searchInput = document.getElementById('search');
+        const resultsDiv = document.getElementById('search-results');
+        let pagefindInstance = null;
+        let activeIndex = -1;
+        let currentResults = [];
+
+        function getPagefind() {
+          if (pagefindInstance) return pagefindInstance;
+          if (typeof Pagefind === 'undefined') return null;
+          try {
+            pagefindInstance = new Pagefind();
+          } catch (e) {
+            console.warn('Pagefind init failed:', e.message);
+          }
+          return pagefindInstance;
+        }
+
+        function renderResults(results) {
+          if (!results || results.length === 0) {
+            resultsDiv.innerHTML = '<div class="p-4 text-sm text-gray-500 text-center">No results found.</div>';
+            resultsDiv.classList.remove('hidden');
+            return;
+          }
+          currentResults = results;
+          activeIndex = -1;
+
+          resultsDiv.innerHTML = results.map((result, idx) => {
+            const meta = result.meta || {};
+            return `
+              <a href="${result.url}" class="block px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-b-0 transition-colors ${idx === 0 ? 'rounded-t-xl' : ''} ${idx === results.length - 1 ? 'rounded-b-xl' : ''}">
+                <div class="text-sm font-semibold text-navy-800 mb-0.5">${result.meta?.title || result.url}</div>
+                <div class="text-xs text-gray-500 line-clamp-2">${result.excerpt || ''}</div>
+              </a>
+            `;
+          }).join('');
+
+          resultsDiv.classList.remove('hidden');
+        }
+
+        function hideResults() {
+          resultsDiv.classList.add('hidden');
+          activeIndex = -1;
+          currentResults = [];
+        }
+
+        function highlightResult(index) {
+          const links = resultsDiv.querySelectorAll('a');
+          links.forEach((link, i) => {
+            if (i === index) {
+              link.classList.add('bg-teal-50');
+            } else {
+              link.classList.remove('bg-teal-50');
+            }
+          });
+        }
+
+        async function search(query) {
+          if (!query || query.trim().length < 2) {
+            hideResults();
+            return;
+          }
+
+          const pf = getPagefind();
+          if (!pf) return;
+
+          try {
+            const searchResults = await pf.search(query.trim());
+            if (!searchResults) {
+              hideResults();
+              return;
+            }
+
+            const processed = await Promise.all(
+              searchResults.results.slice(0, 8).map(async (r) => {
+                const data = await r.data();
+                return {
+                  url: data.url,
+                  excerpt: data.excerpt,
+                  meta: data.meta,
+                  raw_url: data.raw_url,
+                };
+              })
+            );
+
+            renderResults(processed);
+          } catch (e) {
+            console.warn('Search failed:', e.message);
+            hideResults();
+          }
+        }
+
+        // Debounced input handler
+        let debounceTimer;
+        searchInput.addEventListener('input', (e) => {
+          clearTimeout(debounceTimer);
+          debounceTimer = setTimeout(() => search(e.target.value), 200);
+        });
+
+        // Keyboard navigation
+        searchInput.addEventListener('keydown', (e) => {
+          if (!resultsDiv.classList.contains('hidden')) {
+            if (e.key === 'ArrowDown') {
+              e.preventDefault();
+              activeIndex = Math.min(activeIndex + 1, currentResults.length - 1);
+              highlightResult(activeIndex);
+            } else if (e.key === 'ArrowUp') {
+              e.preventDefault();
+              activeIndex = Math.max(activeIndex - 1, 0);
+              highlightResult(activeIndex);
+            } else if (e.key === 'Enter' && activeIndex >= 0) {
+              e.preventDefault();
+              const links = resultsDiv.querySelectorAll('a');
+              if (links[activeIndex]) links[activeIndex].click();
+            } else if (e.key === 'Escape') {
+              hideResults();
+            }
+          }
+        });
+
+        // Click outside to close
+        document.addEventListener('click', (e) => {
+          const wrapper = document.getElementById('search-wrapper');
+          if (wrapper && !wrapper.contains(e.target)) {
+            hideResults();
+          }
+        });
+
+        // Focus handler — reopen results if there's text
+        searchInput.addEventListener('focus', () => {
+          if (searchInput.value.trim().length >= 2) {
+            search(searchInput.value);
+          }
+        });
+    </script>
   </body>
 </html>

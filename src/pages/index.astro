@@ -21,6 +21,114 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           A focused, trustworthy resource for influenza symptoms — from early warning signs to emergency red flags.
           Evidence-based, regularly reviewed, designed for clarity.
         </p>
+
+        <!-- Hero search bar -->
+        <div class="relative mb-8 max-w-xl" id="hero-search-wrapper">
+          <div class="flex items-center gap-3 bg-white/15 backdrop-blur-sm border border-white/20 rounded-xl px-5 py-4 transition-all focus-within:bg-white focus-within:border-teal-400 focus-within:shadow-lg focus-within:shadow-teal-500/20">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-teal-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input
+              type="text"
+              id="hero-search"
+              placeholder='Search "fever duration", "flu vs cold", "when to see a doctor"...'
+              class="bg-transparent border-none outline-none text-white placeholder-white/60 text-base w-full"
+              autocomplete="off"
+              aria-label="Search influenza symptoms and guides"
+            />
+            <span class="text-xs text-white/50 bg-white/10 rounded-md px-2 py-1 flex-shrink-0 hidden sm:inline-block">
+              ⌘K
+            </span>
+          </div>
+          <div id="hero-search-results" class="absolute top-full mt-3 left-0 right-0 max-h-80 overflow-y-auto bg-white rounded-xl shadow-xl border border-gray-200 hidden z-50"></div>
+        </div>
+
+        <!-- Hero search script -->
+        <script is:inline>
+            const searchInput = document.getElementById('hero-search');
+            const resultsDiv = document.getElementById('hero-search-results');
+            let pf = null;
+            let activeIdx = -1;
+            let results = [];
+
+            function getPagefind() {
+              if (pf) return pf;
+              if (typeof Pagefind === 'undefined') return null;
+              try {
+                pf = new Pagefind();
+              } catch (e) {}
+              return pf;
+            }
+
+            function hide() {
+              resultsDiv.classList.add('hidden');
+              activeIdx = -1;
+              results = [];
+            }
+
+            function render(items) {
+              if (!items?.length) {
+                resultsDiv.innerHTML = '<div class="p-4 text-sm text-gray-500 text-center">No results found. Try a different search.</div>';
+                resultsDiv.classList.remove('hidden');
+                return;
+              }
+              results = items;
+              activeIdx = -1;
+              resultsDiv.innerHTML = items.map((r, i) => `
+                <a href="${r.url}" class="block px-4 py-3 hover:bg-teal-50 border-b border-gray-100 last:border-b-0 transition-colors">
+                  <div class="text-sm font-semibold text-navy-800 mb-0.5">${r.meta?.title || r.url}</div>
+                  <div class="text-xs text-gray-500 line-clamp-2">${r.excerpt || ''}</div>
+                </a>
+              `).join('');
+              resultsDiv.classList.remove('hidden');
+            }
+
+            function highlight(i) {
+              resultsDiv.querySelectorAll('a').forEach((a, j) => {
+                a.classList.toggle('bg-teal-50', j === i);
+              });
+            }
+
+            async function doSearch(q) {
+              if (!q || q.trim().length < 2) { hide(); return; }
+              const p = getPagefind();
+              if (!p) return;
+              try {
+                const sr = await p.search(q.trim());
+                if (!sr) { hide(); return; }
+                const items = await Promise.all(
+                  sr.results.slice(0, 6).map(async (r) => {
+                    const d = await r.data();
+                    return { url: d.url, excerpt: d.excerpt, meta: d.meta };
+                  })
+                );
+                render(items);
+              } catch (e) { hide(); }
+            }
+
+            let timer;
+            searchInput.addEventListener('input', (e) => {
+              clearTimeout(timer);
+              timer = setTimeout(() => doSearch(e.target.value), 200);
+            });
+
+            searchInput.addEventListener('keydown', (e) => {
+              if (resultsDiv.classList.contains('hidden')) return;
+              if (e.key === 'ArrowDown') { e.preventDefault(); activeIdx = Math.min(activeIdx + 1, results.length - 1); highlight(activeIdx); }
+              else if (e.key === 'ArrowUp') { e.preventDefault(); activeIdx = Math.max(activeIdx - 1, 0); highlight(activeIdx); }
+              else if (e.key === 'Enter' && activeIdx >= 0) { e.preventDefault(); const a = resultsDiv.querySelectorAll('a'); if (a[activeIdx]) a[activeIdx].click(); }
+              else if (e.key === 'Escape') { hide(); }
+            });
+
+            document.addEventListener('click', (e) => {
+              const w = document.getElementById('hero-search-wrapper');
+              if (w && !w.contains(e.target)) hide();
+            });
+
+            searchInput.addEventListener('focus', () => {
+              if (searchInput.value.trim().length >= 2) doSearch(searchInput.value);
+            });
+        </script>
         <div class="flex flex-wrap gap-4">
           <a href="/symptoms/" class="inline-flex items-center gap-2 bg-teal-600 hover:bg-teal-500 text-white font-semibold px-6 py-3 rounded-lg transition-colors text-lg">
             Explore Symptoms

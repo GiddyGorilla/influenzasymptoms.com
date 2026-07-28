@@ -3,18 +3,178 @@ import ArticleLayout from "../../layouts/ArticleLayout.astro";
 ---
 
 <ArticleLayout
-  title="Flu High-Risk Groups"
-  description="Who is at highest risk for flu complications and why early medical care matters."
+  title="Flu High-Risk Groups: Who Is Most Vulnerable"
+  description="Detailed breakdown of groups at highest risk for severe flu complications: age, pregnancy, chronic conditions, and immunocompromise. Why early medical care matters and how to prevent severe illness."
   publishDate="July 2026"
   lastReviewed="July 2026"
 >
   <p>
-    Who is at highest risk for flu complications and why early medical care matters.
+    While anyone can get the flu, certain groups are at significantly higher risk for developing severe illness,
+    complications, hospitalization, and death. The CDC estimates that during recent flu seasons,
+    <strong>approximately 70–85% of flu-related deaths and 50–70% of flu-related hospitalizations</strong> occurred
+    in people aged 65 and older — but age is only one risk factor. Understanding your risk profile allows you to act
+    quickly when symptoms appear and take appropriate preventive measures.
   </p>
 
+  <h2>Who the CDC and WHO Identify as High-Risk</h2>
+  <p>Both the Centers for Disease Control and Prevention (CDC) and the World Health Organization (WHO) identify
+    the following groups as at "increased risk" or "high risk" for severe influenza outcomes:</p>
+
+  <div class="overflow-x-auto">
+    <table>
+      <thead>
+        <tr>
+          <th>Risk Group</th>
+          <th>Why They're at Risk</th>
+          <th>Key Statistics</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Adults 65+</strong></td>
+          <td>Age-related immune decline (immunosenescence); higher prevalence of chronic conditions; reduced vaccine response</td>
+          <td>70–85% of seasonal flu deaths; 50–70% of hospitalizations</td>
+        </tr>
+        <tr>
+          <td><strong>Children under 5</strong> (especially under 2)</td>
+          <td>Immature immune systems; smaller airways more easily compromised; higher risk of febrile seizures and dehydration</td>
+          <td>Highest hospitalization rate among children; 7,000–26,000 pediatric hospitalizations annually in the US</td>
+        </tr>
+        <tr>
+          <td><strong>Pregnant women</strong> (and up to 2 weeks postpartum)</td>
+          <td>Pregnancy alters immune function, heart, and lung physiology; reduced lung capacity as uterus grows</td>
+          <td>Hospitalization risk 2–4× higher than non-pregnant women; risk increases each trimester</td>
+        </tr>
+        <tr>
+          <td><strong>People with chronic lung disease</strong> (asthma, COPD, cystic fibrosis)</td>
+          <td>Preexisting airway inflammation and reduced lung reserve; flu often triggers severe exacerbations</td>
+          <td>Asthma is the most common underlying condition in children hospitalized with flu</td>
+        </tr>
+        <tr>
+          <td><strong>People with heart disease</strong></td>
+          <td>Flu increases cardiac stress; can trigger heart attacks and worsen heart failure</td>
+          <td>6× increased heart attack risk in the week following flu diagnosis (NEJM, 2018)</td>
+        </tr>
+        <tr>
+          <td><strong>People with diabetes</strong> (type 1 and type 2)</td>
+          <td>Hyperglycemia impairs immune response; flu can destabilize blood sugar control</td>
+          <td>3× higher risk of hospitalization and 3× higher risk of ICU admission or death</td>
+        </tr>
+        <tr>
+          <td><strong>Immunocompromised individuals</strong></td>
+          <td>Reduced ability to fight the virus; may have prolonged viral shedding and higher risk of antiviral resistance</td>
+          <td>Includes cancer patients, transplant recipients, HIV/AIDS, long-term steroid users, biologic therapy</td>
+        </tr>
+        <tr>
+          <td><strong>People with kidney or liver disease</strong></td>
+          <td>Impaired drug clearance; metabolic stress from infection can worsen organ function</td>
+          <td>Chronic kidney disease associated with significantly increased flu complication rates</td>
+        </tr>
+        <tr>
+          <td><strong>People with neurological conditions</strong></td>
+          <td>May have impaired cough reflex, difficulty clearing secretions, or inability to communicate symptoms</td>
+          <td>Includes stroke, epilepsy, cerebral palsy, intellectual disability, muscular dystrophy, spinal cord injury</td>
+        </tr>
+        <tr>
+          <td><strong>People with BMI ≥ 40</strong></td>
+          <td>Obesity impairs immune response; mechanical restriction of breathing; higher prevalence of comorbid conditions</td>
+          <td>Obesity was a significant risk factor during the 2009 H1N1 pandemic; now a recognized chronic condition for flu risk</td>
+        </tr>
+        <tr>
+          <td><strong>Nursing home / long-term care residents</strong></td>
+          <td>Close living quarters facilitate rapid spread; elderly population with multiple comorbidities; reduced vaccine effectiveness in this group</td>
+          <td>Outbreaks in long-term care facilities can have attack rates of 20–50%; mortality can reach 5–10% of residents</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Why Early Medical Care Matters for High-Risk Groups</h2>
+
+  <h3>The 48-Hour Window</h3>
+  <p>Antiviral medications — oseltamivir (Tamiflu), zanamivir, baloxavir (Xofluza), and peramivir — are most effective
+    when started <strong>within 48 hours of symptom onset</strong>. For high-risk individuals, the CDC recommends:</p>
+  <ul>
+    <li><strong>Contact your healthcare provider as soon as flu symptoms appear</strong> — don't wait to see if symptoms
+      get worse</li>
+    <li><strong>Antivirals can still be considered beyond 48 hours</strong> for hospitalized patients or those with severe,
+      progressive illness — but the greatest benefit comes from early treatment</li>
+    <li><strong>You don't need a positive flu test to start treatment</strong> — if your doctor has high clinical suspicion
+      during flu season, they may prescribe antivirals empirically</li>
+  </ul>
+
+  <div class="callout-warning">
+    <strong>Critical point:</strong> The 48-hour window is from <em>symptom onset</em>, not from when you got tested
+    or saw a doctor. If you're in a high-risk group and develop a sudden fever, body aches, and cough during flu
+    season, call your doctor the same day — don't wait.
+  </div>
+
+  <h3>Benefits of Early Antiviral Treatment</h3>
+  <p>Clinical studies have demonstrated that early antiviral treatment in high-risk patients:</p>
+  <ul>
+    <li>Reduces the duration of illness by approximately 1 day</li>
+    <li>Reduces the risk of lower respiratory tract complications (including pneumonia) by approximately 37–44%</li>
+    <li>Reduces the risk of hospitalization by approximately 26–37%</li>
+    <li>Reduces the risk of death in hospitalized patients (observational studies)</li>
+    <li>May reduce viral shedding, helping protect household contacts</li>
+  </ul>
+
+  <h2>Prevention Strategies for High-Risk Individuals</h2>
+
+  <h3>1. Vaccination — First and Foremost</h3>
+  <p>The annual flu vaccine is the single most effective way to prevent influenza and its complications. The CDC
+    recommends vaccination for everyone 6 months and older, with particular emphasis on high-risk groups. Special
+    considerations:</p>
+  <ul>
+    <li><strong>Adults 65+:</strong> High-dose (Fluzone High-Dose Quadrivalent), adjuvanted (Fluad Quadrivalent), or recombinant (Flublok Quadrivalent) vaccines are preferred, as they produce a stronger immune response in older adults</li>
+    <li><strong>Pregnant women:</strong> Inactivated flu vaccine is safe and recommended during any trimester. Vaccination during pregnancy also transfers protective antibodies to the baby, providing protection for the first months of life</li>
+    <li><strong>Immunocompromised individuals:</strong> Inactivated vaccine is recommended; live attenuated (nasal spray) vaccine is contraindicated. Vaccine response may be reduced, but partial protection is better than none</li>
+    <li><strong>Egg allergy:</strong> People with egg allergy (including severe) can safely receive any licensed flu vaccine. Special precautions are no longer required per current CDC guidelines</li>
+  </ul>
+
+  <h3>2. Pneumococcal Vaccination</h3>
+  <p>Since pneumonia is the most common serious flu complication, adults 65+ and younger adults with certain chronic
+    conditions should also receive pneumococcal vaccination (PCV15, PCV20, or PCV15 followed by PPSV23). This protects
+    against the bacteria most commonly responsible for secondary bacterial pneumonia.</p>
+
+  <h3>3. Antiviral Chemoprophylaxis</h3>
+  <p>If a high-risk individual is exposed to someone with confirmed flu (household contact, for example), their doctor
+    may prescribe a preventive course of antivirals. This is called chemoprophylaxis and is generally considered for:</p>
+  <ul>
+    <li>Severely immunocompromised individuals who may not respond to vaccination</li>
+    <li>Unvaccinated high-risk individuals during institutional outbreaks (nursing homes, hospitals)</li>
+    <li>The first two weeks after vaccination (before immunity develops)</li>
+  </ul>
+
+  <h3>4. Non-Pharmaceutical Interventions</h3>
+  <ul>
+    <li><strong>Hand hygiene:</strong> Frequent handwashing with soap and water for at least 20 seconds</li>
+    <li><strong>Respiratory etiquette:</strong> Cover coughs/sneezes with a tissue or elbow</li>
+    <li><strong>Avoid touching your face:</strong> Especially eyes, nose, and mouth</li>
+    <li><strong>Physical distancing during flu season:</strong> Avoid crowded indoor spaces; wear a mask in high-risk settings</li>
+    <li><strong>Clean and disinfect surfaces:</strong> Flu virus can survive on hard surfaces for up to 24–48 hours</li>
+    <li><strong>Stay home when sick:</strong> Protect others, especially other high-risk individuals</li>
+  </ul>
+
+  <h2>Special Focus: Caring for High-Risk Children</h2>
+  <p>Parents and caregivers of children in high-risk groups should:</p>
+  <ul>
+    <li><strong>Know the emergency warning signs:</strong> Rapid breathing, bluish lips, chest retractions, dehydration, unresponsiveness</li>
+    <li><strong>Never give aspirin to children or teenagers with flu-like symptoms</strong> — it can cause Reye's syndrome, a life-threatening condition affecting the liver and brain</li>
+    <li><strong>Call the pediatrician early:</strong> Rather than waiting to see if symptoms improve</li>
+    <li><strong>Vaccinate the entire household</strong> ("cocooning") to protect the high-risk child</li>
+    <li><strong>Ask about preventive antivirals</strong> if someone in the household has confirmed flu</li>
+  </ul>
+
   <div class="callout-info">
-    <strong>📝 Full content coming soon.</strong>
-    <p>Our team is working on a comprehensive guide for this topic.
-    Check back soon, or explore our other <a href="/symptoms/">symptom guides</a> for immediate answers.</p>
+    <h3>Summary: Action Plan for High-Risk Individuals During Flu Season</h3>
+    <ol>
+      <li><strong>Get vaccinated</strong> — the single most important preventive step</li>
+      <li><strong>Have a plan:</strong> Know how to contact your healthcare provider quickly (after-hours number, telehealth option)</li>
+      <li><strong>Act fast:</strong> If flu symptoms develop, call your doctor within hours — not days</li>
+      <li><strong>Ask about antivirals:</strong> You don't need to test positive to benefit from treatment</li>
+      <li><strong>Monitor closely:</strong> Know the emergency warning signs and when to escalate care</li>
+      <li><strong>Protect your household:</strong> Encourage vaccination and hygiene among family members</li>
+    </ol>
   </div>
 </ArticleLayout>
