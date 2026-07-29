@@ -17,7 +17,7 @@ const organizationSchema: Record<string, any> = {
   "@type": "Organization",
   name: "InfluenzaSymptoms.com",
   url: siteUrl,
-  logo: `${siteUrl}/og-image.svg`,
+  logo: `${siteUrl}/images/favicon.svg`,
   sameAs: [],
   contactPoint: [
     {
@@ -40,7 +40,7 @@ const publisherSchema: Record<string, any> = {
   "@type": "Organization",
   name: "InfluenzaSymptoms.com",
   url: siteUrl,
-  logo: `${siteUrl}/og-image.svg`,
+  logo: `${siteUrl}/images/favicon.svg`,
 };
 
 // --- Schema.org: WebSite ---
@@ -100,6 +100,25 @@ function generateBreadcrumbs(pathname: string): Record<string, any> | null {
 
 const breadcrumbSchema = generateBreadcrumbs(Astro.url.pathname);
 
+// --- Visible breadcrumb segments (for HTML rendering) ---
+const breadcrumbSegments: { name: string; url: string }[] = (() => {
+  if (Astro.url.pathname === "/" || Astro.url.pathname === "") return [];
+  const segments = Astro.url.pathname.replace(/^\/|\/$/g, "").split("/");
+  if (segments.length === 0 || segments[0] === "") return [];
+
+  const result: { name: string; url: string }[] = [{ name: "Home", url: "/" }];
+  let accumulatedPath = "";
+  segments.forEach((seg) => {
+    if (!seg) return;
+    accumulatedPath += "/" + seg;
+    const name = seg
+      .replace(/-/g, " ")
+      .replace(/\b\w/g, (c: string) => c.toUpperCase());
+    result.push({ name, url: accumulatedPath + "/" });
+  });
+  return result;
+})();
+
 // Build combined JSON-LD array
 const allSchemas: Record<string, any>[] = [
   organizationSchema,
@@ -115,6 +134,7 @@ if (jsonLd.length > 0) allSchemas.push(...jsonLd);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-site-verification" content="9Vwt8jY3FPIWqUu3rMilxwFBYNKemLIu5ih2HMj1aM0" />
     <meta name="description" content={description} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
@@ -124,6 +144,7 @@ if (jsonLd.length > 0) allSchemas.push(...jsonLd);
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image || siteUrl + '/og-image.svg'} />
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
     <link rel="canonical" href={currentUrl} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -135,39 +156,39 @@ if (jsonLd.length > 0) allSchemas.push(...jsonLd);
   </head>
   <body>
     <!-- Emergency banner -->
-    <div class="bg-red-600 text-white text-center py-2 px-4 text-sm font-medium">
+    <div class="bg-red-600 text-white text-center py-2.5 px-4 text-sm font-medium tracking-wide">
       ⚠️ If you are experiencing a medical emergency, call 911 (US) or 112 (EU) immediately.
       This site provides educational information only — not medical advice.
     </div>
 
     <!-- Header -->
-    <header class="bg-white border-b border-gray-100 sticky top-0 z-50">
+    <header class="bg-white/95 backdrop-blur-md border-b border-gray-100 sticky top-0 z-50 shadow-sm">
       <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
-          <a href="/" class="flex items-center gap-2 font-bold text-xl text-navy-800 hover:text-teal-600 transition-colors">
-            <span class="text-2xl">🦠</span>
-            <span>Influenza<span class="text-teal-600">Symptoms</span></span>
+          <a href="/" class="flex items-center gap-2.5 font-bold text-xl text-navy-800 hover:text-teal-600 transition-colors group">
+            <img src="/images/favicon.svg" alt="" class="w-8 h-8" width="32" height="32" aria-hidden="true" />
+            <span>Influenza<span class="text-teal-600 group-hover:text-teal-500 transition-colors">Symptoms</span></span>
           </a>
-          <div class="hidden md:flex items-center gap-8">
-            <a href="/symptoms/" class="text-sm font-medium text-gray-600 hover:text-navy-800 transition-colors">Symptoms</a>
-            <a href="/compare/" class="text-sm font-medium text-gray-600 hover:text-navy-800 transition-colors">Compare</a>
-            <a href="/when-to-seek-help/" class="text-sm font-medium text-gray-600 hover:text-navy-800 transition-colors">When to Seek Help</a>
-            <a href="/treatment/" class="text-sm font-medium text-gray-600 hover:text-navy-800 transition-colors">Treatment</a>
-            <a href="/prevention/" class="text-sm font-medium text-gray-600 hover:text-navy-800 transition-colors">Prevention</a>
+          <div class="hidden md:flex items-center gap-1">
+            <a href="/symptoms/" class="text-sm font-medium text-gray-600 hover:text-navy-800 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">Symptoms</a>
+            <a href="/compare/" class="text-sm font-medium text-gray-600 hover:text-navy-800 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">Compare</a>
+            <a href="/when-to-seek-help/" class="text-sm font-medium text-gray-600 hover:text-navy-800 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">When to Seek Help</a>
+            <a href="/treatment/" class="text-sm font-medium text-gray-600 hover:text-navy-800 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">Treatment</a>
+            <a href="/prevention/" class="text-sm font-medium text-gray-600 hover:text-navy-800 hover:bg-gray-50 px-3 py-2 rounded-lg transition-all">Prevention</a>
           </div>
-          <button id="mobile-menu-btn" class="md:hidden text-gray-600" aria-label="Menu">
+          <button id="mobile-menu-btn" class="md:hidden text-gray-600 hover:text-navy-800 p-1 rounded-lg transition-colors" aria-label="Menu">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
         </div>
         <!-- Mobile menu -->
-        <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 pb-4">
-          <a href="/symptoms/" class="block px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50">Symptoms</a>
-          <a href="/compare/" class="block px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50">Compare</a>
-          <a href="/when-to-seek-help/" class="block px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50">When to Seek Help</a>
-          <a href="/treatment/" class="block px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50">Treatment</a>
-          <a href="/prevention/" class="block px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50">Prevention</a>
+        <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 pb-4 animate-scale-in">
+          <a href="/symptoms/" class="block px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg mx-2">Symptoms</a>
+          <a href="/compare/" class="block px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg mx-2">Compare</a>
+          <a href="/when-to-seek-help/" class="block px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg mx-2">When to Seek Help</a>
+          <a href="/treatment/" class="block px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg mx-2">Treatment</a>
+          <a href="/prevention/" class="block px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg mx-2">Prevention</a>
         </div>
         <script>
           document.getElementById('mobile-menu-btn').addEventListener('click', function() {
@@ -177,54 +198,92 @@ if (jsonLd.length > 0) allSchemas.push(...jsonLd);
       </nav>
     </header>
 
+    <!-- Breadcrumb Navigation -->
+    {breadcrumbSegments.length > 0 && (
+      <nav aria-label="Breadcrumb" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 pb-1">
+        <ol class="breadcrumbs">
+          {breadcrumbSegments.map((seg, i) => (
+            <li>
+              {i < breadcrumbSegments.length - 1 ? (
+                <><a href={seg.url}>{seg.name}</a><span class="separator" aria-hidden="true"> › </span></>
+              ) : (
+                <span class="current">{seg.name}</span>
+              )}
+            </li>
+          ))}
+        </ol>
+      </nav>
+    )}
+
     <main>
       <slot />
     </main>
 
     <!-- Footer -->
-    <footer class="bg-navy-900 text-gray-300 mt-20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer class="bg-navy-900 text-gray-300 mt-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
           <div class="md:col-span-1">
-            <a href="/" class="text-white font-bold text-lg mb-3 block">
-              🦠 InfluenzaSymptoms
+            <a href="/" class="flex items-center gap-2.5 text-white font-bold text-lg mb-4 group">
+              <img src="/images/favicon.svg" alt="" class="w-7 h-7" width="28" height="28" aria-hidden="true" />
+              <span>Influenza<span class="text-teal-400 group-hover:text-teal-300 transition-colors">Symptoms</span></span>
             </a>
-            <p class="text-sm text-gray-400">
+            <p class="text-sm text-gray-400 leading-relaxed">
               Evidence-based information about influenza symptoms, treatment, and prevention.
             </p>
           </div>
           <div>
-            <h4 class="text-white font-semibold mb-3">Explore</h4>
-            <ul class="space-y-2 text-sm">
-              <li><a href="/symptoms/" class="hover:text-white transition-colors">Symptoms</a></li>
-              <li><a href="/compare/" class="hover:text-white transition-colors">Compare Illnesses</a></li>
-              <li><a href="/when-to-seek-help/" class="hover:text-white transition-colors">When to Seek Help</a></li>
-              <li><a href="/treatment/" class="hover:text-white transition-colors">Treatment</a></li>
-              <li><a href="/prevention/" class="hover:text-white transition-colors">Prevention</a></li>
+            <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Explore</h4>
+            <ul class="space-y-2.5 text-sm">
+              <li><a href="/symptoms/" class="text-gray-400 hover:text-white transition-colors">Symptoms</a></li>
+              <li><a href="/compare/" class="text-gray-400 hover:text-white transition-colors">Compare Illnesses</a></li>
+              <li><a href="/when-to-seek-help/" class="text-gray-400 hover:text-white transition-colors">When to Seek Help</a></li>
+              <li><a href="/treatment/" class="text-gray-400 hover:text-white transition-colors">Treatment</a></li>
+              <li><a href="/prevention/" class="text-gray-400 hover:text-white transition-colors">Prevention</a></li>
             </ul>
           </div>
           <div>
-            <h4 class="text-white font-semibold mb-3">About</h4>
-            <ul class="space-y-2 text-sm">
-              <li><a href="/about/" class="hover:text-white transition-colors">About Us</a></li>
-              <li><a href="/about/#editorial-policy" class="hover:text-white transition-colors">Editorial Policy</a></li>
-              <li><a href="/about/#medical-review" class="hover:text-white transition-colors">Medical Review</a></li>
+            <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">About</h4>
+            <ul class="space-y-2.5 text-sm">
+              <li><a href="/about/" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+              <li><a href="/about/#editorial-policy" class="text-gray-400 hover:text-white transition-colors">Editorial Policy</a></li>
+              <li><a href="/about/#medical-review" class="text-gray-400 hover:text-white transition-colors">Medical Review</a></li>
             </ul>
           </div>
           <div>
-            <h4 class="text-white font-semibold mb-3">Legal</h4>
-            <ul class="space-y-2 text-sm">
-              <li><a href="/disclaimer/" class="hover:text-white transition-colors">Medical Disclaimer</a></li>
-              <li><a href="/privacy/" class="hover:text-white transition-colors">Privacy Policy</a></li>
-              <li><a href="/terms/" class="hover:text-white transition-colors">Terms of Use</a></li>
+            <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Legal</h4>
+            <ul class="space-y-2.5 text-sm">
+              <li><a href="/disclaimer/" class="text-gray-400 hover:text-white transition-colors">Medical Disclaimer</a></li>
+              <li><a href="/privacy/" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+              <li><a href="/terms/" class="text-gray-400 hover:text-white transition-colors">Terms of Use</a></li>
             </ul>
           </div>
         </div>
-        <div class="border-t border-gray-700 mt-8 pt-8 text-sm text-gray-500 text-center">
+        <div class="border-t border-gray-700/50 mt-12 pt-8 text-sm text-gray-500 text-center leading-relaxed">
           <p>© 2026 InfluenzaSymptoms.com. All content is for informational purposes only. Not a substitute for professional medical advice.</p>
         </div>
       </div>
     </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" aria-label="Back to top" title="Back to top">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7" />
+      </svg>
+    </button>
+    <script>
+      const btn = document.getElementById('back-to-top');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+          btn.classList.add('visible');
+        } else {
+          btn.classList.remove('visible');
+        }
+      });
+      btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    </script>
 
     <!-- Pagefind -->
     <script src="/pagefind/pagefind.js" defer></script>

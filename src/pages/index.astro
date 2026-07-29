@@ -7,41 +7,64 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   description="Evidence-based guide to influenza symptoms. Learn the early signs, day-by-day progression, when to seek emergency care, and how flu differs from colds and COVID-19."
 >
   <!-- Hero -->
-  <section class="bg-gradient-to-br from-navy-900 via-navy-800 to-navy-700 text-white relative overflow-hidden">
-    <!-- Subtle background illustration -->
-    <svg class="absolute right-0 top-0 w-96 h-full opacity-5 pointer-events-none" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <circle cx="200" cy="150" r="80" fill="none" stroke="white" stroke-width="1"/>
-      <circle cx="200" cy="150" r="60" fill="none" stroke="white" stroke-width="0.5"/>
-      <circle cx="200" cy="150" r="8" fill="white"/>
-      <line x1="200" y1="70" x2="200" y2="50" stroke="white" stroke-width="1"/>
-      <line x1="200" y1="230" x2="200" y2="250" stroke="white" stroke-width="1"/>
-      <line x1="120" y1="150" x2="100" y2="150" stroke="white" stroke-width="1"/>
-      <line x1="280" y1="150" x2="300" y2="150" stroke="white" stroke-width="1"/>
-      <line x1="143" y1="93" x2="129" y2="79" stroke="white" stroke-width="1"/>
-      <line x1="257" y1="93" x2="271" y2="79" stroke="white" stroke-width="1"/>
-      <line x1="143" y1="207" x2="129" y2="221" stroke="white" stroke-width="1"/>
-      <line x1="257" y1="207" x2="271" y2="221" stroke="white" stroke-width="1"/>
-      <!-- Stethoscope -->
-      <path d="M 50 300 Q 50 250 100 250 Q 150 250 150 300 L 150 400" fill="none" stroke="white" stroke-width="2"/>
-      <circle cx="150" cy="415" r="20" fill="none" stroke="white" stroke-width="2"/>
-    </svg>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
+  <section class="section-gradient-navy relative overflow-hidden text-white">
+    <!-- Hero glow effects -->
+    <div class="hero-glow hero-glow-teal"></div>
+    <div class="hero-glow hero-glow-navy"></div>
+
+    <!-- Hero illustration -->
+    <div class="absolute right-0 top-1/2 -translate-y-1/2 w-[45%] hidden lg:block pointer-events-none opacity-40">
+      <img src="/images/virus.svg" alt="" class="w-full h-auto animate-float-slow" aria-hidden="true" />
+    </div>
+
+    <!-- Background pattern -->
+    <div class="absolute inset-0 opacity-[0.03]">
+      <div class="absolute inset-0 section-pattern-dots"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 relative z-10">
       <div class="max-w-3xl">
-        <span class="inline-block bg-teal-600/30 text-teal-300 text-sm font-semibold px-4 py-1.5 rounded-full mb-6">
-          🦠 Evidence-Based Health Information
-        </span>
-        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
+        <!-- Trust pill -->
+        <div class="inline-flex items-center gap-3 mb-6">
+          <span class="trust-pill text-white/90 bg-teal-600/30 border-teal-500/30">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+            Evidence-Based Health Information
+          </span>
+          <span class="trust-pill text-white/80 bg-navy-700/40 border-navy-600/30">
+            🩺 Medically Reviewed
+          </span>
+        </div>
+
+        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6 tracking-tight">
           Understand Your <span class="text-teal-400">Flu Symptoms</span>.
-          Know When to Act.
+          <br class="hidden sm:block" />Know When to Act.
         </h1>
-        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8 max-w-2xl">
-          A focused, trustworthy resource for influenza symptoms — from early warning signs to emergency red flags.
-          Evidence-based, regularly reviewed, designed for clarity.
+        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-10 max-w-2xl">
+          A focused, trustworthy resource for influenza symptoms &mdash; from early warning signs
+          to emergency red flags. Evidence-based, regularly reviewed, designed for clarity.
         </p>
+
+        <!-- Stats row -->
+        <div class="flex flex-wrap gap-6 mb-10">
+          <div class="stat-badge animate-fade-in">
+            <span class="stat-number">44</span>
+            <span class="stat-label">Articles</span>
+          </div>
+          <div class="stat-badge animate-fade-in stagger-1">
+            <span class="stat-number">100+</span>
+            <span class="stat-label">Citations</span>
+          </div>
+          <div class="stat-badge animate-fade-in stagger-2">
+            <span class="stat-number">5</span>
+            <span class="stat-label">Topic Areas</span>
+          </div>
+        </div>
 
         <!-- Hero search bar -->
         <div class="relative mb-8 max-w-xl" id="hero-search-wrapper">
-          <div class="flex items-center gap-3 bg-white/15 backdrop-blur-sm border border-white/20 rounded-xl px-5 py-4 transition-all focus-within:bg-white focus-within:border-teal-400 focus-within:shadow-lg focus-within:shadow-teal-500/20">
+          <div class="hero-search-wrapper flex items-center gap-3 bg-white/15 backdrop-blur-sm border border-white/20 rounded-xl px-5 py-4 transition-all duration-300 focus-within:bg-white focus-within:border-teal-400">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-teal-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
@@ -57,7 +80,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
               ⌘K
             </span>
           </div>
-          <div id="hero-search-results" class="absolute top-full mt-3 left-0 right-0 max-h-80 overflow-y-auto bg-white rounded-xl shadow-xl border border-gray-200 hidden z-50"></div>
+          <div id="hero-search-results" class="absolute top-full mt-3 left-0 right-0 max-h-80 overflow-y-auto bg-white rounded-xl shadow-2xl border border-gray-200 hidden z-50"></div>
         </div>
 
         <!-- Hero search script -->
@@ -146,12 +169,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
               if (searchInput.value.trim().length >= 2) doSearch(searchInput.value);
             });
         </script>
+
         <div class="flex flex-wrap gap-4">
-          <a href="/symptoms/" class="inline-flex items-center gap-2 bg-teal-600 hover:bg-teal-500 text-white font-semibold px-6 py-3 rounded-lg transition-colors text-lg">
+          <a href="/symptoms/" class="btn-primary text-lg">
             Explore Symptoms
-            <span class="text-xl">→</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
           </a>
-          <a href="/when-to-seek-help/" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3 rounded-lg transition-colors text-lg border border-white/20">
+          <a href="/when-to-seek-help/" class="btn-secondary text-lg">
             🚨 Emergency Signs
           </a>
         </div>
@@ -160,32 +186,38 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </section>
 
   <!-- Quick symptom cards -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-12 relative z-10">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-20">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <a href="/symptoms/" class="group bg-white rounded-xl shadow-lg hover:shadow-xl transition-all p-6 border border-gray-100 hover:border-teal-200">
-        <div class="text-3xl mb-3">🤒</div>
-        <h3 class="font-bold text-lg text-navy-800 group-hover:text-teal-600 transition-colors mb-2">
-          Common Symptoms
-        </h3>
-        <p class="text-sm text-gray-500">
+      <a href="/symptoms/" class="card-premium card-gradient-accent p-7 animate-fade-in-up">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center flex-shrink-0">
+            <img src="/images/thermometer.svg" alt="" class="w-7 h-7" aria-hidden="true" />
+          </div>
+          <h3 class="font-bold text-lg text-navy-800">Common Symptoms</h3>
+        </div>
+        <p class="text-sm text-gray-500 leading-relaxed">
           Fever, cough, body aches, fatigue, and more. Learn the hallmark signs of influenza.
         </p>
       </a>
-      <a href="/compare/" class="group bg-white rounded-xl shadow-lg hover:shadow-xl transition-all p-6 border border-gray-100 hover:border-teal-200">
-        <div class="text-3xl mb-3">🔬</div>
-        <h3 class="font-bold text-lg text-navy-800 group-hover:text-teal-600 transition-colors mb-2">
-          Flu vs. Cold vs. COVID
-        </h3>
-        <p class="text-sm text-gray-500">
+      <a href="/compare/" class="card-premium card-gradient-accent p-7 animate-fade-in-up stagger-1">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center flex-shrink-0">
+            <img src="/images/lungs.svg" alt="" class="w-7 h-7" aria-hidden="true" />
+          </div>
+          <h3 class="font-bold text-lg text-navy-800">Flu vs. Cold vs. COVID</h3>
+        </div>
+        <p class="text-sm text-gray-500 leading-relaxed">
           Can't tell them apart? Our detailed comparison helps you spot the differences.
         </p>
       </a>
-      <a href="/when-to-seek-help/" class="group bg-white rounded-xl shadow-lg hover:shadow-xl transition-all p-6 border border-gray-100 hover:border-red-200">
-        <div class="text-3xl mb-3">🚨</div>
-        <h3 class="font-bold text-lg text-navy-800 group-hover:text-red-600 transition-colors mb-2">
-          Emergency Warning Signs
-        </h3>
-        <p class="text-sm text-gray-500">
+      <a href="/when-to-seek-help/" class="card-premium card-gradient-accent p-7 animate-fade-in-up stagger-2 border-red-100 hover:border-red-200">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center flex-shrink-0">
+            <span class="text-2xl">🚨</span>
+          </div>
+          <h3 class="font-bold text-lg text-navy-800">Emergency Warning Signs</h3>
+        </div>
+        <p class="text-sm text-gray-500 leading-relaxed">
           Know when flu symptoms require immediate medical attention. Don't wait.
         </p>
       </a>
@@ -193,31 +225,37 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </section>
 
   <!-- Symptom timeline teaser -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+    <div class="card-premium overflow-hidden">
       <div class="grid md:grid-cols-2">
-        <div class="p-8 md:p-12">
-          <span class="text-teal-600 font-semibold text-sm uppercase tracking-wide">Day by Day Guide</span>
-          <h2 class="text-3xl md:text-4xl font-extrabold text-navy-900 mt-2 mb-4">
+        <div class="p-10 md:p-14">
+          <span class="text-teal-600 font-semibold text-sm uppercase tracking-wider">Day by Day Guide</span>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-navy-900 mt-3 mb-5 tracking-tight">
             Flu Symptoms Timeline: What to Expect Each Day
           </h2>
-          <p class="text-gray-600 leading-relaxed mb-6">
+          <p class="text-gray-600 leading-relaxed mb-8">
             From the first tickle in your throat to full recovery. Our day-by-day guide walks you through
-            the typical progression of influenza symptoms — so you know what's normal and what's not.
+            the typical progression of influenza symptoms &mdash; so you know what's normal and what's not.
           </p>
-          <div class="flex flex-wrap gap-2 mb-6">
-            <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-3 py-1 rounded-full">Day 1-2: Onset</span>
-            <span class="bg-red-100 text-red-800 text-xs font-semibold px-3 py-1 rounded-full">Day 3-4: Peak</span>
-            <span class="bg-teal-100 text-teal-800 text-xs font-semibold px-3 py-1 rounded-full">Day 5-7: Recovery</span>
+          <div class="flex flex-wrap gap-2 mb-8">
+            <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-3 py-1.5 rounded-full">Day 1-2: Onset</span>
+            <span class="bg-red-100 text-red-800 text-xs font-semibold px-3 py-1.5 rounded-full">Day 3-4: Peak</span>
+            <span class="bg-teal-100 text-teal-800 text-xs font-semibold px-3 py-1.5 rounded-full">Day 5-7: Recovery</span>
           </div>
-          <a href="/symptoms/flu-symptoms-timeline/" class="inline-flex items-center gap-2 text-teal-600 font-semibold hover:text-teal-500 transition-colors">
-            Read the full timeline →
+          <a href="/symptoms/flu-symptoms-timeline/" class="btn-primary">
+            Read the full timeline
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
           </a>
         </div>
-        <div class="bg-gradient-to-br from-teal-600 to-navy-800 p-8 md:p-12 flex items-center justify-center">
-          <div class="text-white space-y-6 text-center">
-            <div class="text-5xl">📅</div>
-            <p class="text-xl font-serif italic">"Knowing what to expect reduces anxiety. Most flu cases follow a predictable pattern."</p>
+        <div class="bg-gradient-to-br from-teal-600 via-teal-600 to-navy-800 p-10 md:p-14 flex items-center justify-center relative overflow-hidden">
+          <div class="absolute inset-0 opacity-10">
+            <div class="section-pattern-dots absolute inset-0"></div>
+          </div>
+          <div class="text-white space-y-6 text-center relative z-10">
+            <img src="/images/timeline.svg" alt="" class="w-full max-w-sm mx-auto opacity-90" aria-hidden="true" />
+            <p class="text-lg font-serif italic text-teal-100">"Knowing what to expect reduces anxiety. Most flu cases follow a predictable pattern."</p>
           </div>
         </div>
       </div>
@@ -225,87 +263,120 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </section>
 
   <!-- Topic hubs grid -->
-  <section class="bg-white py-20">
+  <section class="bg-white py-24 section-pattern-dots">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl md:text-4xl font-extrabold text-navy-900 text-center mb-4">
-        Everything You Need to Know About the Flu
-      </h2>
-      <p class="text-gray-500 text-center max-w-2xl mx-auto mb-12">
-        Explore our comprehensive guides covering every aspect of influenza symptoms, treatment, and prevention.
-      </p>
+      <div class="text-center mb-14">
+        <span class="text-teal-600 font-semibold text-sm uppercase tracking-wider">Comprehensive Guides</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-navy-900 mt-3 mb-4 tracking-tight">
+          Everything You Need to Know About the Flu
+        </h2>
+        <p class="text-gray-500 max-w-2xl mx-auto leading-relaxed">
+          Explore our comprehensive guides covering every aspect of influenza symptoms, treatment, and prevention.
+        </p>
+      </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <a href="/symptoms/" class="group bg-cream rounded-xl p-6 border border-gray-100 hover:border-teal-300 hover:bg-teal-100/30 transition-all">
-          <span class="text-3xl block mb-4">🦠</span>
+        <a href="/symptoms/" class="card-premium card-gradient-accent p-7 animate-fade-in-up group">
+          <div class="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+            <img src="/images/thermometer.svg" alt="" class="w-6 h-6" aria-hidden="true" />
+          </div>
           <h3 class="font-bold text-lg text-navy-800 group-hover:text-teal-600 transition-colors mb-2">Symptoms Hub</h3>
-          <p class="text-sm text-gray-500">Complete guide to all flu symptoms, from common to severe. Day-by-day timeline, symptoms by age group.</p>
-          <span class="inline-block mt-3 text-teal-600 font-semibold text-sm group-hover:translate-x-1 transition-transform">Browse symptoms →</span>
+          <p class="text-sm text-gray-500 leading-relaxed">Complete guide to all flu symptoms, from common to severe. Day-by-day timeline, symptoms by age group.</p>
+          <span class="inline-flex items-center gap-1 mt-4 text-teal-600 font-semibold text-sm group-hover:gap-2 transition-all">
+            Browse symptoms <span class="text-lg leading-none">→</span>
+          </span>
         </a>
 
-        <a href="/compare/" class="group bg-cream rounded-xl p-6 border border-gray-100 hover:border-teal-300 hover:bg-teal-100/30 transition-all">
-          <span class="text-3xl block mb-4">🔬</span>
+        <a href="/compare/" class="card-premium card-gradient-accent p-7 animate-fade-in-up stagger-1 group">
+          <div class="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+            <img src="/images/lungs.svg" alt="" class="w-6 h-6" aria-hidden="true" />
+          </div>
           <h3 class="font-bold text-lg text-navy-800 group-hover:text-teal-600 transition-colors mb-2">Compare Illnesses</h3>
-          <p class="text-sm text-gray-500">Flu vs. cold, COVID-19, RSV, strep throat, allergies. Clear comparison charts and symptom checklists.</p>
-          <span class="inline-block mt-3 text-teal-600 font-semibold text-sm group-hover:translate-x-1 transition-transform">Compare symptoms →</span>
+          <p class="text-sm text-gray-500 leading-relaxed">Flu vs. cold, COVID-19, RSV, strep throat, allergies. Clear comparison charts and symptom checklists.</p>
+          <span class="inline-flex items-center gap-1 mt-4 text-teal-600 font-semibold text-sm group-hover:gap-2 transition-all">
+            Compare symptoms <span class="text-lg leading-none">→</span>
+          </span>
         </a>
 
-        <a href="/when-to-seek-help/" class="group bg-cream rounded-xl p-6 border border-gray-100 hover:border-teal-300 hover:bg-teal-100/30 transition-all">
-          <span class="text-3xl block mb-4">🚨</span>
-          <h3 class="font-bold text-lg text-navy-800 group-hover:text-teal-600 transition-colors mb-2">When to Seek Help</h3>
-          <p class="text-sm text-gray-500">Emergency warning signs, when to see a doctor, when to go to the ER, and telehealth options.</p>
-          <span class="inline-block mt-3 text-teal-600 font-semibold text-sm group-hover:translate-x-1 transition-transform">Know the signs →</span>
+        <a href="/when-to-seek-help/" class="card-premium card-gradient-accent p-7 animate-fade-in-up stagger-2 group">
+          <div class="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+            <span class="text-xl">🚨</span>
+          </div>
+          <h3 class="font-bold text-lg text-navy-800 group-hover:text-red-600 transition-colors mb-2">When to Seek Help</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Emergency warning signs, when to see a doctor, when to go to the ER, and telehealth options.</p>
+          <span class="inline-flex items-center gap-1 mt-4 text-red-600 font-semibold text-sm group-hover:gap-2 transition-all">
+            Know the signs <span class="text-lg leading-none">→</span>
+          </span>
         </a>
 
-        <a href="/treatment/" class="group bg-cream rounded-xl p-6 border border-gray-100 hover:border-teal-300 hover:bg-teal-100/30 transition-all">
-          <span class="text-3xl block mb-4">💊</span>
+        <a href="/treatment/" class="card-premium card-gradient-accent p-7 animate-fade-in-up stagger-3 group">
+          <div class="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+            <span class="text-xl">💊</span>
+          </div>
           <h3 class="font-bold text-lg text-navy-800 group-hover:text-teal-600 transition-colors mb-2">Treatment & Recovery</h3>
-          <p class="text-sm text-gray-500">Medications, home remedies, recovery timeline, when antivirals help, and post-flu care.</p>
-          <span class="inline-block mt-3 text-teal-600 font-semibold text-sm group-hover:translate-x-1 transition-transform">View treatments →</span>
+          <p class="text-sm text-gray-500 leading-relaxed">Medications, home remedies, recovery timeline, when antivirals help, and post-flu care.</p>
+          <span class="inline-flex items-center gap-1 mt-4 text-teal-600 font-semibold text-sm group-hover:gap-2 transition-all">
+            View treatments <span class="text-lg leading-none">→</span>
+          </span>
         </a>
 
-        <a href="/prevention/" class="group bg-cream rounded-xl p-6 border border-gray-100 hover:border-teal-300 hover:bg-teal-100/30 transition-all">
-          <span class="text-3xl block mb-4">🛡️</span>
+        <a href="/prevention/" class="card-premium card-gradient-accent p-7 animate-fade-in-up stagger-4 group">
+          <div class="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+            <img src="/images/shield.svg" alt="" class="w-6 h-6" aria-hidden="true" />
+          </div>
           <h3 class="font-bold text-lg text-navy-800 group-hover:text-teal-600 transition-colors mb-2">Prevention Guide</h3>
-          <p class="text-sm text-gray-500">Vaccine information, hygiene habits, immune support, and how to protect your family during flu season.</p>
-          <span class="inline-block mt-3 text-teal-600 font-semibold text-sm group-hover:translate-x-1 transition-transform">Prevent the flu →</span>
+          <p class="text-sm text-gray-500 leading-relaxed">Vaccine information, hygiene habits, immune support, and how to protect your family during flu season.</p>
+          <span class="inline-flex items-center gap-1 mt-4 text-teal-600 font-semibold text-sm group-hover:gap-2 transition-all">
+            Prevent the flu <span class="text-lg leading-none">→</span>
+          </span>
         </a>
 
-        <a href="/symptoms/flu-symptoms-in-children/" class="group bg-cream rounded-xl p-6 border border-gray-100 hover:border-teal-300 hover:bg-teal-100/30 transition-all">
-          <span class="text-3xl block mb-4">👶</span>
+        <a href="/symptoms/flu-symptoms-in-children/" class="card-premium card-gradient-accent p-7 animate-fade-in-up stagger-5 group">
+          <div class="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+            <span class="text-xl">👶</span>
+          </div>
           <h3 class="font-bold text-lg text-navy-800 group-hover:text-teal-600 transition-colors mb-2">Flu in Children</h3>
-          <p class="text-sm text-gray-500">Special considerations for babies, toddlers, and children. Warning signs every parent should know.</p>
-          <span class="inline-block mt-3 text-teal-600 font-semibold text-sm group-hover:translate-x-1 transition-transform">Protect your child →</span>
+          <p class="text-sm text-gray-500 leading-relaxed">Special considerations for babies, toddlers, and children. Warning signs every parent should know.</p>
+          <span class="inline-flex items-center gap-1 mt-4 text-teal-600 font-semibold text-sm group-hover:gap-2 transition-all">
+            Protect your child <span class="text-lg leading-none">→</span>
+          </span>
         </a>
       </div>
     </div>
   </section>
 
   <!-- Trust section -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
     <div class="text-center max-w-3xl mx-auto">
-      <span class="text-teal-600 font-semibold text-sm uppercase tracking-wide">Our Commitment</span>
-      <h2 class="text-3xl md:text-4xl font-extrabold text-navy-900 mt-2 mb-4">
+      <span class="text-teal-600 font-semibold text-sm uppercase tracking-wider">Our Commitment</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold text-navy-900 mt-3 mb-5 tracking-tight">
         Evidence-Based. Medically Reviewed. Transparent.
       </h2>
-      <p class="text-gray-600 leading-relaxed mb-10">
-        Every article is researched using authoritative sources — CDC, WHO, NHS, and peer-reviewed medical literature.
+      <p class="text-gray-600 leading-relaxed mb-12">
+        Every article is researched using authoritative sources &mdash; CDC, WHO, NHS, and peer-reviewed medical literature.
         We cite our sources, date-stamp our reviews, and maintain full editorial transparency.
       </p>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <div class="bg-white rounded-xl p-6 border border-gray-100">
-          <div class="text-3xl mb-3">📚</div>
-          <h4 class="font-bold text-navy-800 mb-1">Cited Sources</h4>
-          <p class="text-sm text-gray-500">Every claim is backed by links to CDC, WHO, NHS, and peer-reviewed research.</p>
+        <div class="card-premium p-6 animate-fade-in-up">
+          <div class="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl">📚</span>
+          </div>
+          <h4 class="font-bold text-navy-800 mb-1.5">Cited Sources</h4>
+          <p class="text-sm text-gray-500 leading-relaxed">Every claim is backed by links to CDC, WHO, NHS, and peer-reviewed research.</p>
         </div>
-        <div class="bg-white rounded-xl p-6 border border-gray-100">
-          <div class="text-3xl mb-3">🩺</div>
-          <h4 class="font-bold text-navy-800 mb-1">Medical Review</h4>
-          <p class="text-sm text-gray-500">Content is reviewed for accuracy. Last-reviewed dates on every page.</p>
+        <div class="card-premium p-6 animate-fade-in-up stagger-1">
+          <div class="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl">🩺</span>
+          </div>
+          <h4 class="font-bold text-navy-800 mb-1.5">Medical Review</h4>
+          <p class="text-sm text-gray-500 leading-relaxed">Content is reviewed for accuracy. Last-reviewed dates on every page.</p>
         </div>
-        <div class="bg-white rounded-xl p-6 border border-gray-100">
-          <div class="text-3xl mb-3">🔓</div>
-          <h4 class="font-bold text-navy-800 mb-1">No Hidden Agenda</h4>
-          <p class="text-sm text-gray-500">No ads, no sponsored content. Just clear, trustworthy health information.</p>
+        <div class="card-premium p-6 animate-fade-in-up stagger-2">
+          <div class="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl">🔓</span>
+          </div>
+          <h4 class="font-bold text-navy-800 mb-1.5">No Hidden Agenda</h4>
+          <p class="text-sm text-gray-500 leading-relaxed">No ads, no sponsored content. Just clear, trustworthy health information.</p>
         </div>
       </div>
     </div>

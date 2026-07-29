@@ -9,6 +9,24 @@ import ArticleLayout from "../../layouts/ArticleLayout.astro";
   reviewer="Dr. Sarah Mitchell, MD"
   publishDate="2026-07-28"
   lastReviewed="2026-07-28"
+  faqItems={[
+    {
+      question: "Can the flu shot give you the flu?",
+      answer: "No. The injected flu vaccine contains inactivated (killed) virus — it is biologically impossible for it to cause influenza infection. The nasal spray vaccine contains live but weakened viruses that can only replicate in the cooler temperatures of the nasal passages; they cannot survive at core body temperature and cannot cause flu in the lungs. If you feel mildly unwell after vaccination — low-grade fever, muscle aches, fatigue — this is your immune system mounting its protective response, not the flu itself. These symptoms are far milder than actual influenza and typically last only 1-2 days."
+    },
+    {
+      question: "When should I get vaccinated?",
+      answer: "The optimal window is September through October (for the Northern Hemisphere). The vaccine takes about 2 weeks to provide full protection, and immunity lasts approximately 6-8 months. Getting vaccinated too early (July/August) raises the concern that protection may wane before flu season ends. However, vaccination later in the season is still beneficial — as long as flu viruses are circulating, getting the shot in January or even February provides protection. Children aged 6 months to 8 years who are getting vaccinated for the first time need two doses, at least 4 weeks apart, and should start as soon as the vaccine is available."
+    },
+    {
+      question: "Is the flu shot safe during pregnancy?",
+      answer: "Yes. The flu vaccine is recommended during any trimester of pregnancy and is one of the most extensively studied medical interventions in pregnancy. Decades of data demonstrate its safety. Additionally, maternal vaccination is critically important because pregnancy itself increases the risk of severe flu complications by 2-3 fold. Vaccination during pregnancy also protects the baby — antibodies cross the placenta and provide immunity during the first months of life when the infant is too young to be vaccinated. A randomized controlled trial found maternal flu vaccination reduced laboratory-confirmed influenza in infants under 6 months by approximately 50%."
+    },
+    {
+      question: "Why do I need a new flu shot every year?",
+      answer: "Two reasons. First, the influenza virus mutates frequently through a process called antigenic drift — small genetic changes that alter the surface proteins the immune system recognizes. Because the circulating strains change, last year's vaccine may not match this year's viruses. Second, the immune protection from vaccination wanes over time — antibody levels decline significantly within 6-8 months. Annual vaccination ensures you have the best possible protection against the strains most likely to circulate in the upcoming season. The WHO reviews global flu surveillance data twice a year to select the strains for the next season's vaccine."
+    },
+  ]}
 >
   <p>
     The influenza vaccine is the single most effective tool we have for preventing flu and its complications. Each year, the vaccine prevents millions of illnesses, hundreds of thousands of hospitalizations, and thousands of deaths. This guide covers the types of flu vaccines available, how they're made, how effective they actually are, who should get vaccinated, and the evidence behind common concerns.

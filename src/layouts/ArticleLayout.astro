@@ -9,11 +9,13 @@ export interface Props {
   reviewer?: string;
   image?: string;
   faqItems?: { question: string; answer: string }[];
+  illustration?: string;
+  relatedArticles?: { title: string; url: string }[];
 }
 const {
   title, description, publishDate, lastReviewed,
   author = "InfluenzaSymptoms Editorial Team",
-  reviewer, image, faqItems,
+  reviewer, image, faqItems, illustration, relatedArticles,
 } = Astro.props;
 
 // --- ISO Date helper ---
@@ -38,7 +40,6 @@ const slotContent = await Astro.slots.render("default");
 const questionWords = /^(How|What|When|Where|Why|Can|Do|Is|Are|Should|Does|Will|Which|Who)\s/i;
 
 function extractFAQs(html: string): { question: string; answer: string }[] {
-  // Match <h2> and <h3> blocks with their content until next heading
   const headingRegex = /<(h[23])\b[^>]*>(.*?)<\/\1>/gi;
   const matches: { tag: string; text: string; index: number; endIndex: number }[] = [];
   let m: RegExpExecArray | null;
@@ -53,13 +54,11 @@ function extractFAQs(html: string): { question: string; answer: string }[] {
     const isQuestion = heading.text.endsWith("?") || questionWords.test(heading.text);
     if (!isQuestion) continue;
 
-    // Extract answer: text between this heading and the next heading
     const nextHeadingIndex = i + 1 < matches.length ? matches[i + 1].index : html.length;
     let answerHtml = html.slice(heading.endIndex, nextHeadingIndex);
-    // Strip HTML tags for plain text answer
     const answerText = answerHtml.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
     if (answerText.length > 0) {
-      faqs.push({ question: heading.text, answer: answerText.slice(0, 300) }); // Truncate long answers
+      faqs.push({ question: heading.text, answer: answerText.slice(0, 300) });
     }
   }
   return faqs;
@@ -87,6 +86,50 @@ function extractTOC(html: string): { id: string; text: string }[] {
 
 const tocItems = extractTOC(slotContent);
 
+// --- Related articles auto-suggestion (if not explicitly provided) ---
+const categoryMap: Record<string, { title: string; url: string }[]> = {
+  symptoms: [
+    { title: "Flu Symptoms Day by Day: What to Expect", url: "/symptoms/flu-symptoms-timeline/" },
+    { title: "Early Flu Symptoms: Recognizing the First Signs", url: "/symptoms/early-flu-symptoms/" },
+    { title: "How Long Is the Flu Contagious?", url: "/symptoms/how-long-is-flu-contagious/" },
+  ],
+  compare: [
+    { title: "Flu vs. Cold: How to Tell the Difference", url: "/compare/flu-vs-cold/" },
+    { title: "Flu vs. RSV: Symptoms and Differences", url: "/compare/flu-vs-rsv/" },
+    { title: "Flu vs. Pneumonia: Know the Difference", url: "/compare/flu-vs-pneumonia/" },
+  ],
+  prevention: [
+    { title: "Flu Shot Myths vs. Facts", url: "/prevention/flu-shot-myths/" },
+    { title: "Hygiene & Prevention Habits", url: "/prevention/hygiene-habits/" },
+    { title: "Immune System Support for Flu Season", url: "/prevention/immune-support/" },
+  ],
+  treatment: [
+    { title: "Flu Medications: What Works and What Doesn't", url: "/treatment/flu-medications/" },
+    { title: "Home Remedies for Flu Relief", url: "/treatment/home-remedies/" },
+    { title: "Flu Recovery Timeline: What to Expect", url: "/treatment/recovery-timeline/" },
+  ],
+  "when-to-seek-help": [
+    { title: "When to See a Doctor for the Flu", url: "/when-to-seek-help/when-to-see-doctor/" },
+    { title: "High-Risk Groups: Who Needs Extra Caution", url: "/when-to-seek-help/high-risk-groups/" },
+    { title: "Telehealth for Flu: When Virtual Care Works", url: "/when-to-seek-help/telehealth-for-flu/" },
+  ],
+};
+
+function deriveCategory(pathname: string): string {
+  const segments = pathname.split("/").filter(Boolean);
+  return segments[0] || "symptoms";
+}
+
+function autoSuggestRelated(pageUrl: string, existingArticles?: { title: string; url: string }[]): { title: string; url: string }[] {
+  if (existingArticles && existingArticles.length > 0) return existingArticles;
+  const category = deriveCategory(pageUrl);
+  const candidates = categoryMap[category] || categoryMap["symptoms"];
+  // Filter out the current page and return 2-3
+  return candidates.filter(a => a.url !== pageUrl).slice(0, 3);
+}
+
+const suggestedRelated = autoSuggestRelated(Astro.url.pathname, relatedArticles);
+
 // --- Schema.org: MedicalWebPage ---
 const siteUrl = Astro.site?.origin ?? "https://influenzasymptoms.com";
 const currentUrl = new URL(Astro.url.pathname, siteUrl).href;
@@ -105,7 +148,7 @@ const medicalWebPageSchema: Record<string, any> = {
     "@type": "Organization",
     name: "InfluenzaSymptoms.com",
     url: siteUrl,
-    logo: `${siteUrl}/og-image.svg`,
+    logo: `${siteUrl}/images/favicon.svg`,
   },
   about: {
     "@type": "MedicalCondition",
@@ -160,8 +203,8 @@ if (faqSchema) articleSchemas.push(faqSchema);
       <!-- Main content -->
       <div class="flex-1 min-w-0 max-w-4xl">
         <!-- Article header -->
-        <header class="mb-10">
-          <h1 class="text-4xl md:text-5xl font-extrabold text-navy-900 font-sans leading-tight mb-4">
+        <header class="mb-12">
+          <h1 class="text-4xl md:text-5xl font-extrabold text-navy-900 font-sans leading-tight mb-5 tracking-tight">
             {title}
           </h1>
           <p class="text-xl text-gray-500 font-serif leading-relaxed mb-6">
@@ -170,24 +213,37 @@ if (faqSchema) articleSchemas.push(faqSchema);
 
           <!-- Prominent review date badge -->
           {lastReviewed && (
-            <div class="mb-4 inline-flex items-center gap-2 bg-green-50 border border-green-200 rounded-lg px-4 py-2">
-              <span class="text-green-600 font-semibold text-sm">✓ Medically reviewed on {lastReviewed}</span>
+            <div class="mb-5 inline-flex items-center gap-2 bg-green-50 border border-green-200 rounded-lg px-4 py-2.5 shadow-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-600" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-green-700 font-semibold text-sm">Medically reviewed on {lastReviewed}</span>
             </div>
           )}
 
           <!-- Meta line -->
-          <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500">
+          <div class="flex flex-wrap items-center gap-5 text-sm text-gray-500 border-b border-gray-200 pb-5">
             {publishDate && (
-              <span>📅 Published: {publishDate}</span>
+              <span class="inline-flex items-center gap-1.5">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                Published: {publishDate}
+              </span>
             )}
             {author && (
-              <span>✍️ {author}</span>
+              <span class="inline-flex items-center gap-1.5">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+                {author}
+              </span>
             )}
           </div>
 
           {reviewer && (
-            <div class="mt-4 bg-teal-100/50 border border-teal-200 rounded-lg px-4 py-3 flex items-start gap-3">
-              <span class="text-teal-600 text-lg mt-0.5">🩺</span>
+            <div class="mt-5 card-premium rounded-lg px-5 py-4 flex items-start gap-3 bg-teal-50/60 border-teal-100">
+              <span class="text-teal-600 text-xl mt-0.5 flex-shrink-0">🩺</span>
               <div>
                 <p class="text-sm font-semibold text-teal-800">Medically reviewed by</p>
                 <p class="text-sm text-teal-700">{reviewer}</p>
@@ -196,32 +252,83 @@ if (faqSchema) articleSchemas.push(faqSchema);
           )}
         </header>
 
+        <!-- Article illustration -->
+        {illustration && (
+          <div class="infographic">
+            <img src={illustration} alt="" loading="lazy" />
+          </div>
+        )}
+
         <!-- Article body -->
         <div class="prose max-w-none">
           <Fragment set:html={slotContent} />
         </div>
 
         <!-- Sources section -->
-        <div class="mt-16 pt-8 border-t border-gray-200">
-          <h3 class="text-lg font-semibold text-navy-800 mb-2">Sources</h3>
-          <p class="text-sm text-gray-500">
+        <div class="mt-20 pt-8 border-t border-gray-200 bg-white rounded-xl p-6 card-premium">
+          <h3 class="text-lg font-semibold text-navy-800 mb-3">Sources</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">
             This article references information from the CDC, WHO, NHS, and peer-reviewed medical literature.
-            Content is reviewed regularly for accuracy. <a href="/about/#editorial-policy" class="text-teal-600 underline">Learn about our editorial policy</a>.
+            Content is reviewed regularly for accuracy. <a href="/about/#editorial-policy" class="text-teal-600 underline decoration-teal-600/30 hover:decoration-teal-600 transition">Learn about our editorial policy</a>.
           </p>
         </div>
+
+        <!-- FAQ Accordion -->
+        {detectedFAQs.length > 0 && (
+          <div class="mt-16">
+            <h2 class="text-2xl font-bold text-navy-800 mb-6">Frequently Asked Questions</h2>
+            <div class="faq-accordion space-y-3">
+              {detectedFAQs.map((faq, i) => (
+                <details class="faq-item card-premium rounded-xl overflow-hidden" open={i === 0}>
+                  <summary class="cursor-pointer px-6 py-4 font-semibold text-navy-800 hover:text-teal-600 transition-colors flex items-center justify-between select-none">
+                    <span>{faq.question}</span>
+                    <svg class="faq-chevron w-5 h-5 text-teal-600 flex-shrink-0 ml-3 transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </summary>
+                  <div class="px-6 pb-5 text-gray-700 text-base leading-relaxed">
+                    {faq.answer}
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Related Articles -->
+        {suggestedRelated.length > 0 && (
+          <div class="mt-16">
+            <h2 class="text-2xl font-bold text-navy-800 mb-6">You Might Also Like</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {suggestedRelated.map((article) => (
+                <a href={article.url} class="related-article-card card-premium rounded-xl p-5 flex items-center justify-between group">
+                  <span class="text-sm font-semibold text-navy-800 group-hover:text-teal-600 transition-colors pr-2">{article.title}</span>
+                  <svg class="w-5 h-5 text-teal-600 flex-shrink-0 group-hover:translate-x-1 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       <!-- TOC Sidebar -->
       {tocItems.length > 0 && (
         <aside class="lg:w-64 flex-shrink-0">
-          <nav class="lg:sticky lg:top-24 bg-white border border-gray-200 rounded-lg p-5">
-            <h2 class="text-sm font-semibold text-navy-800 uppercase tracking-wider mb-3">On this page</h2>
-            <ul class="space-y-2">
+          <nav class="lg:sticky lg:top-24 card-premium rounded-xl p-5">
+            <h2 class="text-sm font-semibold text-navy-800 uppercase tracking-wider mb-4 flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+              </svg>
+              On this page
+            </h2>
+            <ul class="space-y-1">
               {tocItems.map((item) => (
                 <li>
                   <a
                     href={`#${item.id}`}
-                    class="block text-sm text-gray-600 hover:text-teal-600 transition-colors py-1 border-l-2 border-transparent hover:border-teal-500 pl-3 -ml-3"
+                    class="block text-sm text-gray-600 hover:text-teal-600 transition-colors py-2 border-l-2 border-transparent hover:border-teal-500 pl-3 -ml-3 rounded-r"
                   >
                     {item.text}
                   </a>

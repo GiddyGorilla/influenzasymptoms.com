@@ -9,6 +9,24 @@ import ArticleLayout from "../../layouts/ArticleLayout.astro";
   reviewer="Dr. Sarah Mitchell, MD"
   publishDate="2026-07-28"
   lastReviewed="2026-07-28"
+  faqItems={[
+    {
+      question: "Can you have flu and COVID at the same time?",
+      answer: "Yes — co-infection with influenza and SARS-CoV-2 (the virus that causes COVID-19) is possible. This phenomenon is sometimes referred to as \"flurona.\" Co-infection can lead to more severe illness than either infection alone, as both viruses attack the respiratory system. A 2022 study found that adults with co-infection had a higher risk of requiring mechanical ventilation and a higher mortality rate compared to those infected with a single virus. Testing is the only reliable way to determine if you have one or both infections."
+    },
+    {
+      question: "Which is more dangerous — flu or COVID-19?",
+      answer: "COVID-19 generally has a higher risk of severe outcomes, including hospitalization, ICU admission, and death, compared to seasonal influenza. COVID-19 is also associated with a broader range of complications including blood clots, multi-organ effects, and Long COVID — a syndrome of persistent symptoms lasting months. However, influenza can also be severe and deadly, especially in high-risk groups, and should not be dismissed as \"just the flu.\" Both viruses deserve serious attention, and vaccines exist for both."
+    },
+    {
+      question: "Do I need separate tests for flu and COVID-19?",
+      answer: "Not necessarily. Many testing sites now offer combination (multiplex) tests that can detect influenza A, influenza B, and SARS-CoV-2 from a single nasal swab. These tests return results in 15-30 minutes and are increasingly available at pharmacies, urgent care centers, and doctor's offices. If a combination test isn't available, your healthcare provider may order separate tests. Testing is especially important because antivirals for both flu (Tamiflu, Xofluza) and COVID-19 (Paxlovid) work best when started early."
+    },
+    {
+      question: "How can I tell flu from COVID-19 without a test?",
+      answer: "It is difficult — possibly impossible — to reliably distinguish between flu and COVID-19 based on symptoms alone. Both cause fever, cough, fatigue, body aches, and sore throat. Loss of taste or smell is more distinctive of COVID-19, but it is not universal. The onset of symptoms offers a clue: flu typically hits suddenly (within hours), while COVID-19 symptoms often build over several days. However, these patterns aren't reliable enough for diagnosis. If you have symptoms, get tested — don't guess."
+    },
+  ]}
 >
   <p>
     Influenza and COVID-19 are both contagious respiratory illnesses, but they're caused by different viruses.

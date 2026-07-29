@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
+  <defs>
+    <linearGradient id="lungL" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a2540" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#2c9a92" stop-opacity="0.15"/>
+    </linearGradient>
+    <linearGradient id="lungR" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a2540" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#2c9a92" stop-opacity="0.15"/>
+    </linearGradient>
+    <linearGradient id="lungFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a2540"/>
+      <stop offset="100%" stop-color="#1a365d"/>
+    </linearGradient>
+  </defs>
+  <!-- Trachea -->
+  <rect x="190" y="30" width="20" height="60" rx="6" fill="url(#lungFill)"/>
+  <!-- Bronchi split -->
+  <path d="M200 90 L170 140" stroke="#0a2540" stroke-width="8" stroke-linecap="round"/>
+  <path d="M200 90 L230 140" stroke="#0a2540" stroke-width="8" stroke-linecap="round"/>
+  <!-- Left lung -->
+  <path d="M100 130 C60 130 40 170 50 220 C60 270 120 280 160 260 C170 200 160 150 100 130Z" fill="url(#lungL)" stroke="#0a2540" stroke-width="2.5"/>
+  <!-- Right lung -->
+  <path d="M300 130 C340 130 360 170 350 220 C340 270 280 280 240 260 C230 200 240 150 300 130Z" fill="url(#lungR)" stroke="#0a2540" stroke-width="2.5"/>
+  <!-- Bronchiole branches left -->
+  <g stroke="#1a365d" stroke-width="1.5" stroke-linecap="round" opacity="0.5">
+    <path d="M170 140 L140 170"/>
+    <path d="M140 170 L120 185"/>
+    <path d="M140 170 L135 200"/>
+    <path d="M170 140 L155 195"/>
+    <path d="M155 195 L140 220"/>
+  </g>
+  <!-- Bronchiole branches right -->
+  <g stroke="#1a365d" stroke-width="1.5" stroke-linecap="round" opacity="0.5">
+    <path d="M230 140 L260 170"/>
+    <path d="M260 170 L280 185"/>
+    <path d="M260 170 L265 200"/>
+    <path d="M230 140 L245 195"/>
+    <path d="M245 195 L260 220"/>
+  </g>
+  <!-- Small alveoli dots -->
+  <g fill="#2c9a92" opacity="0.2">
+    <circle cx="110" cy="200" r="3"/><circle cx="130" cy="230" r="2.5"/><circle cx="100" cy="185" r="2"/>
+    <circle cx="150" cy="245" r="3"/><circle cx="90" cy="215" r="2"/><circle cx="120" cy="250" r="2.5"/>
+    <circle cx="290" cy="200" r="3"/><circle cx="270" cy="230" r="2.5"/><circle cx="300" cy="185" r="2"/>
+    <circle cx="250" cy="245" r="3"/><circle cx="310" cy="215" r="2"/><circle cx="280" cy="250" r="2.5"/>
+  </g>
+  <!-- Breath lines -->
+  <g stroke="#3db5a8" stroke-width="1" stroke-linecap="round" opacity="0.3">
+    <path d="M190 15 Q200 8 210 15"/>
+    <path d="M185 22 Q200 14 215 22"/>
+  </g>
+</svg>
